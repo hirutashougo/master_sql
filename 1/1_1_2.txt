@@ -1,0 +1,31 @@
+/*x,y,z列の内、大きい数値を表示する*/
+SELECT
+	ids AS 'key',
+	CASE
+		WHEN z > 
+		(
+			CASE
+				WHEN x > y THEN x 
+				ELSE y 
+			END
+		) THEN z
+		ELSE 
+		(
+			CASE
+				WHEN x > y THEN x 
+				ELSE y 
+			END
+		)
+	END AS greatest
+FROM
+	greatests
+;
+
++-----+----------+
+| key | greatest |
++-----+----------+
+| A   |        3 |
+| B   |        5 |
+| C   |        7 |
+| D   |        8 |
++-----+----------+

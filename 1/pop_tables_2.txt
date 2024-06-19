@@ -1,0 +1,49 @@
+CREATE TABLE
+	pop_tables_2
+	(
+		prefecture_name CHAR(4),
+		sex INT NOT NULL,
+		population INT,
+		PRIMARY KEY(prefecture_name, sex)
+	)
+;
+
+INSERT INTO
+	pop_tables_2
+VALUES
+	('徳島', 1, 60),
+	('徳島', 2, 40),
+	('香川', 1, 100),
+	('香川', 2, 100),
+	('愛媛', 1, 100),
+	('愛媛', 2, 50),
+	('高知', 1, 100),
+	('高知', 2, 100),
+	('福岡', 1, 100),
+	('福岡', 2, 200),
+	('佐賀', 1, 20),
+	('佐賀', 2, 80),
+	('長崎', 1, 125),
+	('長崎', 2, 125),
+	('東京', 1, 250),
+	('東京', 2, 150)
+;
+
+SELECT
+	prefecture_name AS 県名,
+	sex AS 性別,
+	population AS 人口
+FROM
+	pop_tables_2
+ORDER BY
+	CASE prefecture_name
+	WHEN '徳島' THEN 1
+	WHEN '香川' THEN 2
+	WHEN '愛媛' THEN 3
+	WHEN '高知' THEN 4
+	WHEN '福岡' THEN 5
+	WHEN '佐賀' THEN 6
+	WHEN '長崎' THEN 7
+	WHEN '東京' THEN 8
+	END
+;
