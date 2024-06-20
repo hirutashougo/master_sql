@@ -1,0 +1,57 @@
+SELECT
+	name,
+	DENSE_RANK() OVER (ORDER BY price DESC) AS id
+FROM
+	duplicates_products
+;
+
+DELETE
+	a
+FROM
+	duplicates_products AS a
+INNER JOIN
+	second_duplicates_products AS b
+ON
+	a.name = b.name
+WHERE
+	(
+		SELECT
+		FROM
+		
+	)
+AND
+	a.price > b.price
+;
+
+
+DELETE FROM
+	duplicates_products
+WHERE
+	(
+		SELECT
+			RANK() OVER (ORDER BY price DESC)
+		FROM
+			duplicates_products
+	)
+	>
+	(
+		SELECT
+			RANK() OVER (ORDER BY price DESC)
+		FROM
+			second_duplicates_products
+	)
+	AND
+	(
+		SELECT
+			name
+		FROM
+			duplicates_products
+	)
+	=
+	(
+		SELECT
+			name
+		FROM
+			second_duplicates_products
+	)
+;

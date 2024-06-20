@@ -1,0 +1,22 @@
+CREATE TABLE
+	products
+	(
+		name CHAR(3),
+		price INT,
+		PRIMARY KEY(name)
+	)
+;
+
+INSERT INTO
+	products
+VALUES
+	(
+		'りんご', 50
+	),
+	(
+		'みかん', 100
+	),
+	(
+		'バナナ', 80
+	)
+;

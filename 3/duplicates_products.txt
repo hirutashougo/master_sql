@@ -1,0 +1,55 @@
+CREATE TABLE
+	duplicates_products
+	(
+		name CHAR(3),
+		price INT
+	)
+;
+
+INSERT INTO
+	duplicates_products
+VALUES
+	(
+		'りんご', 50
+	),
+	(
+		'みかん', 100
+	),
+	(
+		'みかん', 100
+	),
+	(
+		'みかん', 100
+	),
+	(
+		'バナナ', 80
+	)
+;
+
+CREATE TABLE
+	second_duplicates_products
+	(
+		name CHAR(3),
+		price INT
+	)
+;
+
+INSERT INTO
+	second_duplicates_products
+VALUES
+	(
+		'りんご', 50
+	),
+	(
+		'みかん', 100
+	),
+	(
+		'みかん', 100
+	),
+	(
+		'みかん', 100
+	),
+	(
+		'バナナ', 80
+	)
+;
