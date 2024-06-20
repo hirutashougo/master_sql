@@ -1,0 +1,263 @@
+COUNT(name) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+
+
+CREATE TABLE
+	test1_duplicates_products
+	(
+	SELECT
+		*,
+		COUNT(name) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS id
+	FROM
+		duplicates_products
+	)
+;
+
+
+DELETE FROM
+	test_duplicates_products
+WHERE
+	id <
+	(
+		SELECT
+			MAX(P1.id)
+		FROM
+			test_duplicates_products AS P1,
+			test_duplicates_products AS P2
+		WHERE
+			P1.name = P2.name
+		AND
+			P1.price = P2.price
+	)
+;
+
+----------------------------------------------------------
+
+DELETE FROM
+	test_duplicates_products
+WHERE
+	id <
+	(
+		SELECT
+			MAX(P1.id)
+		FROM
+			test_duplicates_products AS P1,
+			test_duplicates_products AS P2
+		WHERE
+			P1.name = P2.name
+		AND
+			P1.id > P2.id
+	)
+;
+
+
++--------+-------+----+
+| name   | price | id |
++--------+-------+----+
+| みかん |   100 |  3 |
+| りんご |    50 |  4 |
+| バナナ |    80 |  5 |
++--------+-------+----+
+
+------------------------------------------------------------
+
+DELETE
+	P1
+FROM
+	duplicates_products AS P1
+INNER JOIN
+	test_duplicates_products AS P2
+ON
+	P1.name = P2.name
+WHERE
+	P2.id <
+	(
+		SELECT
+			MAX(P1.id)
+		FROM
+			test_duplicates_products AS P1,
+			test_duplicates_products AS P2
+		WHERE
+			P1.name = P2.name
+		AND
+			P1.id > P2.id
+	)
+;
+
+DELETE
+	P1
+FROM
+	duplicates_products AS P1
+LEFT OUTER JOIN
+	test_duplicates_products AS P2
+ON
+	P1.name = P2.name
+WHERE
+	P1.name = P2.name
+AND
+	P2.id <
+	(
+		SELECT
+			MAX(P1.id)
+		FROM
+			test_duplicates_products AS P1,
+			test_duplicates_products AS P2
+		WHERE
+			P1.name = P2.name
+		AND
+			P1.id > P2.id
+	)
+;
+
+
++--------+-------+
+| name   | price |
++--------+-------+
+| りんご |    50 |
+| バナナ |    80 |
++--------+-------+
+
+
+DELETE
+	P1
+FROM
+	duplicates_products AS P1
+INNER JOIN
+	test_duplicates_products AS P2
+ON
+	P1.name = P2.name
+WHERE
+	P2.id <
+	(
+		SELECT
+			MAX(P1.id)
+		FROM
+			test_duplicates_products AS P1,
+			test_duplicates_products AS P2
+		WHERE
+			P1.name = P2.name
+		AND
+			P1.id > P2.id
+	)
+;
+
+
+select
+	*
+FROM
+	duplicates_products AS P1
+INNER JOIN
+	test_duplicates_products AS P2
+ON
+	P1.name = P2.name
+;
+
++--------+-------+--------+-------+----+
+| name   | price | name   | price | id |
++--------+-------+--------+-------+----+
+| みかん |   100 | みかん |   100 |  1 |
+| みかん |   100 | みかん |   100 |  1 |
+| みかん |   100 | みかん |   100 |  1 |
+| みかん |   100 | みかん |   100 |  2 |
+| みかん |   100 | みかん |   100 |  2 |
+| みかん |   100 | みかん |   100 |  2 |
+| みかん |   100 | みかん |   100 |  3 |
+| みかん |   100 | みかん |   100 |  3 |
+| みかん |   100 | みかん |   100 |  3 |
+| りんご |    50 | りんご |    50 |  4 |
+| バナナ |    80 | バナナ |    80 |  5 |
++--------+-------+--------+-------+----+
+
+select * from duplicates_products;
++--------+-------+
+| name   | price |
++--------+-------+
+| りんご |    50 |
+| みかん |   100 |
+| みかん |   100 |
+| みかん |   100 |
+| バナナ |    80 |
++--------+-------+
+
+select * from test_duplicates_products;
++--------+-------+----+
+| name   | price | id |
++--------+-------+----+
+| みかん |   100 |  1 |
+| みかん |   100 |  2 |
+| みかん |   100 |  3 |
+| りんご |    50 |  4 |
+| バナナ |    80 |  5 |
++--------+-------+----+
+
+
+
+DELETE FROM
+	test_duplicates_products
+WHERE
+	id <
+	(
+		SELECT
+			MAX(P1.id)
+		FROM
+			test_duplicates_products AS P1,
+			test_duplicates_products AS P2
+		WHERE
+			P1.name = P2.name
+		AND
+			P1.id > P2.id
+	)
+;
+
+
++--------+-------+----+
+| name   | price | id |
++--------+-------+----+
+| みかん |   100 |  3 |
+| りんご |    50 |  4 |
+| バナナ |    80 |  5 |
++--------+-------+----+
+
+
+DELETE
+	P2
+FROM
+	test_duplicates_products AS P1
+INNER JOIN
+	duplicates_products AS P2
+ON
+	P1.name = P2.name
+WHERE
+	P1.id <
+	(
+		SELECT
+			MIN(P1.id)
+		FROM
+			test_duplicates_products AS P1,
+			test_duplicates_products AS P2
+		WHERE
+			P1.name = P2.name
+		AND
+			P1.id > P2.id
+	)
+;
+
+DELETE FROM
+	duplicates_products AS P1
+RIGTHT JOIN
+	test_duplicates_products AS P1
+ON
+	P1.name = P2.name
+WHERE
+	P2.id <
+	(
+		SELECT
+			MIN(P1.id)
+		FROM
+			test_duplicates_products AS P1,
+			test_duplicates_products AS P2
+		WHERE
+			P1.name = P2.name
+		AND
+			P1.id > P2.id
+	)
+;

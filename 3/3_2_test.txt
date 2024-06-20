@@ -1,0 +1,260 @@
+CREATE TABLE
+	second_duplicates_products
+	(
+	SELECT
+		*
+	FROM
+		duplicates_products
+	)
+;
+
+DELETE
+	P1
+FROM
+	duplicates_products AS P1
+INNER JOIN
+	second_duplicates_products AS P2
+ON
+	P1.name = P2.name
+WHERE
+	
+WINDOW 
+	W AS (ORDER BY name ASC ROWS BETWEEN 1 PRECEDING AND 1 PRECEDING)
+;
+
+
+DELETE
+	P1
+FROM
+	duplicates_products AS P1
+INNER JOIN
+	second_duplicates_products AS P2
+ON
+	P1.name = P2.name
+WHERE
+		P1.name = P2.name
+	AND
+		COUNT(P1.name) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+		>
+		COUNT(P2.name) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+;
+
+COUNT(name) OVER (CURRENTROW)
+
+実験
+
+SELECT
+	name,
+	COUNT(name) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS id
+FROM
+	duplicates_products
+;
+
+DELETE
+	P1
+FROM
+	duplicates_products AS P1
+INNER JOIN
+	second_duplicates_products AS P2
+ON
+	P1.name = P2.name
+WHERE
+		P1.name = P2.name
+	AND
+		id >
+		COUNT(P1.name) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+		>
+		COUNT(P2.name) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+;
+
+
+DELETE
+	P1
+FROM
+	duplicates_products AS P1
+INNER JOIN
+	second_duplicates_products AS P2
+ON
+	P1.name = P2.name
+WHERE
+	P1.name in ('りんご', 'バナナ')
+;
+
+
+DELETE
+	P1
+FROM
+	duplicates_products AS P1
+INNER JOIN
+	second_duplicates_products AS P2
+ON
+	P1.name = P2.name
+WHERE
+	(
+		SELECT
+			COUNT(P1.name) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+		FROM
+			duplicates_products
+	)
+	>
+	(
+		SELECT
+			COUNT(P2.name) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+		FROM
+			second_duplicates_products
+	)
+;
+
+SELECT
+	name,
+	MIN(price)
+FROM
+	duplicates_products
+GROUP BY
+	name
+;
+
+DELETE FROM
+	duplicates_products
+GROUP BY
+	name
+;
+
+SELECT
+	P1.name,
+	P2.id
+FROM
+	duplicates_products AS P1
+LEFT OUTER JOIN
+	(
+		SELECT
+			name,
+			COUNT(name) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS id
+		FROM
+			duplicates_products
+	) AS P2
+ON
+	P1.name = P2.name
+;
+
+DELETE
+	P1
+FROM
+	(
+		SELECT
+			name,
+			price,
+			COUNT(name) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS id
+		FROM
+			duplicates_products
+	) AS P1
+INNER JOIN
+	(
+		SELECT
+			name,
+			price,
+			COUNT(name) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS id
+		FROM
+			second_duplicates_products
+	) AS P2
+ON
+	P1.id = P2.id
+WHERE
+		P1.name = P2.name
+	AND
+		P1.id > P2.id
+;
+
+CREATE TABLE
+	test_duplicates_products
+	(
+	SELECT
+		*,
+		COUNT(*) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS id
+	FROM
+		duplicates_products
+	)
+;
+
+DELETE
+	P1
+FROM
+	duplicates_products AS P1
+INNER JOIN
+	(
+		SELECT
+			name,
+			price,
+			COUNT(name) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS id
+		FROM
+			second_duplicates_products
+	) AS P2
+ON
+	P1.name = P2.name
+WHERE
+		P1.name = P2.name
+	AND
+		MIN()
+;
+
+DELETE
+	P1
+FROM
+	duplicates_products AS P1
+INNER JOIN
+	(
+		SELECT
+			name,
+			price,
+			COUNT(name) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS id
+		FROM
+			second_duplicates_products
+	) AS P2
+ON
+	P1.name = P2.name
+WHERE
+	P2.id 
+;
+
+DELETE FROM
+	test_duplicates_products AS P1
+WHERE
+	id <
+	(
+		SELECT
+			MAX(P2.id)
+		FROM
+			test_duplicates_products AS P2
+		WHERE
+			P1.name = P2.name
+		AND
+			P1.price = P2.price
+	)
+;
+
+DELETE FROM
+	duplicates_products
+INNER JOIN
+	(
+		SELECT
+		FROM
+	)
+WHERE
+	()
+;
+
+select
+	name,
+	price,
+	COUNT(*) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS id
+from
+	duplicates_products
+;
+
+select
+	name,
+	COUNT(name) OVER (ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING) AS id
+from
+	duplicates_products
+;
+

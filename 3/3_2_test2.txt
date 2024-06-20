@@ -1,0 +1,255 @@
+SELECT
+	P1.name,
+	P2.name,
+	P1.id,
+	P2.id
+FROM
+	test_duplicates_products P1
+INNER JOIN
+	test_duplicates_products P2
+ON
+	P1.id = P2.id
+WHERE
+	P1.id <
+	(
+		SELECT MAX(id)
+		FROM test_duplicates_products
+		WHERE P1.name = P2.name
+		AND P1.price = P2.price
+	)
+;
+
+SELECT
+	*
+FROM
+	test_duplicates_products AS P1
+WHERE
+	P1.id IN
+	(
+		SELECT MAX(P2.id)
+		FROM test_duplicates_products AS P2
+		WHERE P1.name = P2.name
+		AND P1.price = P2.price
+	)
+;
+
+SELECT
+	*
+FROM
+	test_duplicates_products AS P1
+WHERE
+	P1.id NOT IN
+	(
+		SELECT MAX(P2.id)
+		FROM test_duplicates_products AS P2
+		WHERE P1.name = P2.name
+		AND P1.price = P2.price
+	)
+;
+
+DELETE
+	P1
+FROM
+	test_duplicates_products AS P1
+INNER JOIN
+	test_duplicates_products AS P2
+WHERE
+		P1.name = P2.name
+	AND
+		P1.id > P2.id
+;
+
+
+DELETE
+	P1
+FROM
+	duplicates_products AS P1
+INNER JOIN
+	(
+		test_duplicates_products AS P2
+	INNER JOIN
+		test_duplicates_products AS P3
+	)
+ON
+	P1.name = P2.name
+WHERE
+		P1.name = P2.name
+	AND
+		P2.id > P3.id
+;
+
+SELECT
+	*
+FROM
+	duplicates_products AS P1
+INNER JOIN
+	(
+		test_duplicates_products AS P2
+	INNER JOIN
+		test_duplicates_products AS P3
+	ON
+		P2.id = P3.id
+	)
+ON
+	P1.name = P2.name
+	AND
+	P1.price = P2.price
+;
+
+SELECT
+	P1.*
+FROM
+	test_duplicates_products AS P1
+INNER JOIN
+	test_duplicates_products AS P2
+ON
+	P1.id = P2.id
+;
+
+
+SELECT
+	P1.*
+FROM
+	duplicates_products AS P1
+INNER JOIN
+	test_duplicates_products AS P2
+ON
+	P1.name = P2.name
+WHERE
+	P2.id <=
+	(
+		SELECT MAX(P2.id)
+		FROM test_duplicates_products AS P3
+		WHERE P2.name = P3.name
+		AND P2.price = P3.price
+	)
+;
+
+SELECT
+	*
+FROM
+	test_duplicates_products
+WHERE
+	id IN
+	(
+		SELECT MAX(id)
+		FROM test_duplicates_products
+		GROUP BY name
+	)
+;
+
+SELECT
+	*
+FROM
+	(
+		SELECT
+			*,
+			COUNT(*) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS id
+		FROM
+			duplicates_products
+	) AS P1
+WHERE
+	id IN
+	(
+		SELECT MAX(P1.id)
+		FROM 
+			(
+				SELECT
+					*,
+					COUNT(*) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS id
+				FROM
+					duplicates_products
+			) AS P1
+		GROUP BY name
+	)
+;
+
+DELETE
+	 P1
+FROM
+	duplicates_products AS P1
+INNER JOIN
+	(
+		SELECT
+			*,
+			COUNT(*) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS id
+		FROM
+			duplicates_products
+	) AS P2
+ON
+	P1.name = P2.name
+FROM
+	P2.id NOT IN
+	(
+		SELECT MAX(P1.id)
+		FROM 
+			(
+				SELECT
+					*,
+					COUNT(*) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS id
+				FROM
+					duplicates_products
+			) AS P1
+		GROUP BY name
+	)
+;
+
+
+SELECT
+	*
+FROM
+	P1
+WHERE
+	id IN
+	(
+		SELECT MAX(P2.id)
+		FROM 
+			P2
+		GROUP BY name
+	)
+;
+
+
+
+select
+	P1.*
+from
+	duplicates_products AS P1
+inner join
+	test_duplicates_products AS P2
+on
+	P1.name = P2.name
+;
+
+delete
+	P1
+from
+	duplicates_products AS P1
+inner join
+	test_duplicates_products AS P2
+on
+	P1.name = P2.name
+where
+	P2.price >= 100
+;
+
+
+delete
+	P1
+from
+	duplicates_products AS P1
+inner join
+	test_duplicates_products AS P2
+on
+	P1.name = P2.name
+where
+	P1.name = P2.name
+AND
+	P2.id <
+	(
+		SELECT 
+			MAX(id)
+		FROM
+			test_duplicates_products
+	)
+;
