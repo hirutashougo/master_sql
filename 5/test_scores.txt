@@ -1,0 +1,143 @@
+CREATE TABLE
+	test_scores
+	(
+		students_id INT,
+		subject CHAR(3),
+		score INT
+	)
+;
+
+INSERT INTO
+	test_scores
+VALUES
+	(
+		100, '算数', 100
+	),
+	(
+		100, '国語', 80
+	),
+	(
+		100, '理科', 80
+	),
+	(
+		200, '算数', 80
+	),
+	(
+		200, '国語', 95
+	),
+	(
+		300, '算数', 40
+	),
+	(
+		300, '国語', 90
+	),
+	(
+		300, '社会', 55
+	),
+	(
+		400, '算数', 80
+	)
+;
+
+SELECT
+	*
+FROM
+	test_scores
+;
++-------------+---------+-------+
+| students_id | subject | score |
++-------------+---------+-------+
+|         100 | 算数    |   100 |
+|         100 | 国語    |    80 |
+|         100 | 理科    |    80 |
+|         200 | 算数    |    80 |
+|         200 | 国語    |    95 |
+|         300 | 算数    |    40 |
+|         300 | 国語    |    90 |
+|         300 | 社会    |    55 |
+|         400 | 算数    |    80 |
++-------------+---------+-------+
+
+DROP TABLE
+	test_scores
+;
+
+SELECT DISTINCT
+	students_id
+FROM
+	test_scores AS TS1
+WHERE
+	NOT EXISTS
+	(
+		SELECT
+			*
+		FROM
+			test_scores AS TS2
+		WHERE
+			TS2.students_id = TS1.students_id
+		AND
+			TS2.score < 50
+	)
+;
++---------+--------+
+| meeting | person |
++---------+--------+
+| 第1回   | 伊藤   |
+| 第2回   | 伊藤   |
+| 第3回   | 伊藤   |
+| 第1回   | 水島   |
+| 第2回   | 水島   |
+| 第3回   | 水島   |
+| 第1回   | 坂東   |
+| 第2回   | 坂東   |
+| 第3回   | 坂東   |
+| 第1回   | 宮田   |
+| 第2回   | 宮田   |
+| 第3回   | 宮田   |
++---------+--------+
+
+SELECT
+	M1.meeting,
+	M2.person
+FROM
+	meetings AS M1
+CROSS JOIN
+	meetings AS M2
+WHERE
+	NOT EXISTS
+	(
+		SELECT
+			*
+		FROM
+		 	meetings AS M3
+		 WHERE
+		 	M1.meeting = M3.meeting
+		 AND
+		 	M2.person = M3.person
+	)
+;
+
+
+
+
+SELECT
+	M1.meeting,
+	M2.person
+FROM
+	meetings AS M1,
+	meetings AS M2
+EXCEPT
+SELECT
+	meeting,person
+FROM
+	meetings
+;
+
++---------+--------+
+| meeting | person |
++---------+--------+
+| 第3回   | 伊藤   |
+| 第2回   | 水島   |
+| 第2回   | 坂東   |
+| 第1回   | 宮田   |
++---------+--------+

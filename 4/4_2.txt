@@ -1,0 +1,30 @@
+問題
+
+使用しているDBMSにおいて、
+NULLと文字列を結合したときにどのような値になるか
+
+
+回答
+
+NULLになる。
+
+SELECT
+	'abc' || NULL AS string
+;
+
++--------+
+| string |
++--------+
+|   NULL |
++--------+
+
+
+SELECT
+	'' || NULL AS string
+;
+
++--------+
+| string |
++--------+
+|   NULL |
++--------+

@@ -1,0 +1,92 @@
+1.まず、元のテーブル(products)の行に対して、
+	一意な識別子を付与したテーブル(duplicates_products)を作成する。
+
+CREATE TABLE
+	duplicates_products
+	(
+	SELECT
+		*,
+		COUNT(name) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS id
+	FROM
+		duplicates_products
+	)
+;
+
+select * from duplicates_products;
++--------+-------+----+
+| name   | price | id |
++--------+-------+----+
+| みかん |   100 |  1 |
+| みかん |   100 |  2 |
+| みかん |   100 |  3 |
+| りんご |    50 |  4 |
+| バナナ |    80 |  5 |
++--------+-------+----+
+
+2.元のテーブル(products)を削除する。
+
+DROP TABLE
+	products
+;
+
+3.重複した行を削除する。
+
+DELETE FROM
+	duplicates_products
+WHERE
+	id <
+	(
+		SELECT
+			MAX(P1.id)
+		FROM
+			duplicates_products AS P1,
+			duplicates_products AS P2
+		WHERE
+			P1.name = P2.name
+		AND
+			P1.id > P2.id
+	)
+;
+
++--------+-------+----+
+| name   | price | id |
++--------+-------+----+
+| みかん |   100 |  3 |
+| りんご |    50 |  4 |
+| バナナ |    80 |  5 |
++--------+-------+----+
+
+4.識別子を削除する。
+
+ALTER TABLE 
+	duplicates_products
+DROP COLUMN
+	category
+;
+
+select * from duplicates_products;
++--------+-------+
+| name   | price |
++--------+-------+
+| みかん |   100 |
+| りんご |    50 |
+| バナナ |    80 |
++--------+-------+
+
+5.名前を元(products)に戻す。
+
+RENAME TABLE
+	duplicates_products
+TO
+	products
+;
+
+
+select * from products;
++--------+-------+
+| name   | price |
++--------+-------+
+| みかん |   100 |
+| りんご |    50 |
+| バナナ |    80 |
++--------+-------+

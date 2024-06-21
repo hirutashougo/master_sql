@@ -1,0 +1,128 @@
+CREATE TABLE
+	meetings
+	(
+		meeting CHAR(3),
+		person CHAR(3)
+	)
+;
+
+INSERT INTO
+	meetings
+VALUES
+	(
+		'第1回', '伊藤'
+	),
+	(
+		'第1回', '水島'
+	),
+	(
+		'第1回', '坂東'
+	),
+	(
+		'第2回', '伊藤'
+	),
+	(
+		'第2回', '宮田'
+	),
+	(
+		'第3回', '坂東'
+	),
+	(
+		'第3回', '水島'
+	),
+	(
+		'第3回', '宮田'
+	)
+;
+
+SELECT
+	*
+FROM
+	meetings
+;
++---------+--------+
+| meeting | person |
++---------+--------+
+| 第1回   | 伊藤   |
+| 第1回   | 水島   |
+| 第1回   | 坂東   |
+| 第2回   | 伊藤   |
+| 第2回   | 宮田   |
+| 第3回   | 坂東   |
+| 第3回   | 水島   |
+| 第3回   | 宮田   |
++---------+--------+
+
+DROP TABLE
+	meetings
+;
+
+SELECT DISTINCT
+	M1.meeting, M2.person
+FROM
+	meetings AS M1
+CROSS JOIN
+	meetings AS M2
+;
++---------+--------+
+| meeting | person |
++---------+--------+
+| 第1回   | 伊藤   |
+| 第2回   | 伊藤   |
+| 第3回   | 伊藤   |
+| 第1回   | 水島   |
+| 第2回   | 水島   |
+| 第3回   | 水島   |
+| 第1回   | 坂東   |
+| 第2回   | 坂東   |
+| 第3回   | 坂東   |
+| 第1回   | 宮田   |
+| 第2回   | 宮田   |
+| 第3回   | 宮田   |
++---------+--------+
+
+SELECT
+	M1.meeting,
+	M2.person
+FROM
+	meetings AS M1
+CROSS JOIN
+	meetings AS M2
+WHERE
+	NOT EXISTS
+	(
+		SELECT
+			*
+		FROM
+		 	meetings AS M3
+		 WHERE
+		 	M1.meeting = M3.meeting
+		 AND
+		 	M2.person = M3.person
+	)
+;
+
+
+
+
+SELECT
+	M1.meeting,
+	M2.person
+FROM
+	meetings AS M1,
+	meetings AS M2
+EXCEPT
+SELECT
+	meeting,person
+FROM
+	meetings
+;
+
++---------+--------+
+| meeting | person |
++---------+--------+
+| 第3回   | 伊藤   |
+| 第2回   | 水島   |
+| 第2回   | 坂東   |
+| 第1回   | 宮田   |
++---------+--------+
