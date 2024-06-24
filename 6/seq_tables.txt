@@ -1,0 +1,40 @@
+CREATE TABLE
+	seq_tables
+	(
+		seq INT PRIMARY KEY,
+		name CHAR(5)
+	)
+;
+
+INSERT INTO
+	seq_tables
+VALUES
+	(1,'dick'),
+	(2,'ann'),
+	(3,'rail'),
+	(5,'kar'),
+	(6,'marry'),
+	(8,'ben')
+;
+
++-----+-------+
+| seq | name  |
++-----+-------+
+|   1 | dick  |
+|   2 | ann   |
+|   3 | rail  |
+|   5 | kar   |
+|   6 | marry |
+|   8 | ben   |
++-----+-------+
+
+INSERT INTO
+	seq_tables
+VALUES
+	(1,'dick'),
+	(2,'ann'),
+	(3,'rail'),
+	(4,'kar'),
+	(5,'marry'),
+	(6,'ben')
+;

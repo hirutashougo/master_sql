@@ -1,0 +1,88 @@
++------------+-------------+--------+
+| project_id | step_number | status |
++------------+-------------+--------+
+| AA100      |           0 | comp   |
+| AA100      |           1 | wait   |
+| AA100      |           2 | wait   |
+| B200       |           0 | wait   |
+| B200       |           1 | wait   |
+| CS300      |           0 | comp   |
+| CS300      |           1 | comp   |
+| CS300      |           2 | wait   |
+| CS300      |           3 | wait   |
+| DY400      |           0 | comp   |
+| DY400      |           1 | comp   |
+| DY400      |           2 | comp   |
++------------+-------------+--------+
+
+SELECT
+	*
+FROM
+	projects
+WHERE
+	status = (	CASE
+			WHEN step_number <= 1
+			AND status = 'comp'
+			THEN 'comp'
+			WHEN step_number > 1
+			AND status = 'wait'
+			THEN 'wait'
+			ELSE 'out'
+			END)
+;
+
+ALLは
+
+SELECT
+	*
+FROM
+	projects
+WHERE
+	status = ALL(	
+			SELECT
+				project_id,
+				(CASE
+				WHEN step_number <= 1
+				AND status = 'comp'
+				THEN 'comp'
+				WHEN step_number > 1
+				AND status = 'wait'
+				THEN 'wait'
+				ELSE 'out'
+				END) AS st
+			FROM
+				projects
+			)
+;
+
+SELECT
+	project_id,
+	(CASE
+	WHEN step_number <= 1
+	AND status = 'comp'
+	THEN 'comp'
+	WHEN step_number > 1
+	AND status = 'wait'
+	THEN 'wait'
+	ELSE 'out'
+	END) AS st
+FROM
+	projects
+;
+
++------------+------+
+| project_id | st   |
++------------+------+
+| AA100      | comp |
+| AA100      | out  |
+| AA100      | wait |
+| B200       | out  |
+| B200       | out  |
+| CS300      | comp |
+| CS300      | comp |
+| CS300      | wait |
+| CS300      | wait |
+| DY400      | comp |
+| DY400      | comp |
+| DY400      | out  |
++------------+------+

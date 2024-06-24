@@ -1,0 +1,32 @@
+CREATE TABLE
+	students
+	(
+		student_id INT(3) PRIMARY KEY,
+		department CHAR(12),
+		submit_date DATE
+		
+	)
+;
+
+INSERT INTO
+	students
+VALUES
+	(100,'rigakubu', '2018-10-10'),
+	(101,'rigakubu', '2018-9-22'),
+	(102,'bungakubu', NULL),
+	(103,'bungakubu', '2018-9-10'),
+	(200,'bungakubu', '2018-9-22'),
+	(201,'kougakubu', NULL),
+	(202,'keizaigakubu', '2018-9-25')
+;
++------------+--------------+-------------+
+| student_id | department   | submit_date |
++------------+--------------+-------------+
+|        100 | rigakubu     | 2018-10-10  |
+|        101 | rigakubu     | 2018-09-22  |
+|        102 | bungakubu    | NULL        |
+|        103 | bungakubu    | 2018-09-10  |
+|        200 | bungakubu    | 2018-09-22  |
+|        201 | kougakubu    | NULL        |
+|        202 | keizaigakubu | 2018-09-25  |
++------------+--------------+-------------+

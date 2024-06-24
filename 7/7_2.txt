@@ -1,0 +1,52 @@
+・相関サブクエリ
+SELECT
+	prc_date,
+	prc_amt,
+	(
+		SELECT
+			AVG(prc_amt)
+		FROM
+			accounts AS A2
+		WHERE
+			(
+				SELECT
+					COUNT(prc_date)
+				FROM
+					accounts AS A3
+				WHERE
+					A1.prc_date >= A3.prc_date
+				AND
+					A2.prc_date <= A3.prc_date
+			/*前3行分のデータが対象*/
+			) = 3
+		AND
+			A1.prc_date >= A2.prc_date
+	) AS prc_average
+FROM
+	accounts AS A1
+;
+
+・ウィンドウ関数
+SELECT
+	prc_date,
+	prc_amt,
+	CASE WHEN COUNT(prc_date) OVER(ORDER BY prc_date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) < 3 THEN NULL
+	ELSE
+		AVG(prc_amt)
+		OVER(ORDER BY prc_date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)
+	END AS prc_average
+FROM
+	accounts
+;
+
++------------+---------+-------------+
+| prc_date   | prc_amt | prc_average |
++------------+---------+-------------+
+| 2018-10-26 |   12000 |        NULL |
+| 2018-10-28 |    2500 |        NULL |
+| 2018-10-31 |  -15000 |   -166.6667 |
+| 2018-11-03 |   34000 |   7166.6667 |
+| 2018-11-04 |   -5000 |   4666.6667 |
+| 2018-11-06 |    7200 |  12066.6667 |
+| 2018-11-11 |   11000 |   4400.0000 |
++------------+---------+-------------+

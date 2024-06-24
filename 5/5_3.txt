@@ -1,0 +1,55 @@
+2,
+3,
+5,
+7,
+11,
+13,
+17,
+19,
+23,
+29,
+31,
+37,
+41,
+43,
+47,
+53,
+59,
+61,
+67,
+71,
+73,
+79,
+83,
+89,
+97
+
+SELECT
+	*
+FROM
+	numbers AS N1
+WHERE
+	N1.number <> 1
+AND
+	NOT EXISTS
+		(
+			SELECT
+				*
+			FROM
+				numbers AS N2
+			WHERE
+				N2.number <> 1
+			AND
+				N1.number > N2.number
+			AND
+				MOD(N1.number, N2.number) = 0	
+		)
+;
+
+SELECT
+	*
+FROM
+	numbers
+WHERE
+	MOD(number, 2) = 0
+;
