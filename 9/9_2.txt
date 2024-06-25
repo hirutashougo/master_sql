@@ -1,0 +1,28 @@
+/*Skillテーブルにあるskillを全て持つ人物(emp)を取得*/
+SELECT
+	ES.emp
+FROM
+	Skills AS S
+INNER JOIN
+	EmpSkills AS ES
+ON
+	S.skill = ES.skill
+GROUP BY
+	ES.emp
+HAVING
+	COUNT(S.skill) =
+	(
+		SELECT
+			COUNT(skill)
+		FROM
+			Skills
+	)
+;
+
+出力結果：
++------+
+| emp  |
++------+
+| 相田 |
+| 神崎 |
++------+

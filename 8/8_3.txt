@@ -1,28 +1,31 @@
-MERGE INTO
-	class_A AS cA
-USING
-	(
-		SELECT
-			id,
-			name
-		FROM
-			class_B AS cB
-	) AS class
-ON
-	cA.id = class.id
-WHEN MATCHED THEN
-UPDATE SET
-		cA.id = cB.id,
-		cA.name = cB.name
-WHEN NOT MATCHED THEN
-	INSERT
+MariaDBにおいては、MERGEが使用できないため、
+INSERT INTOを用いて同様の処理を再現する。
+
+/*class_Aテーブルに対し、
+	class_Bテーブルから重複しない形で情報を挿入する*/
+INSERT INTO
+	class_A
 	(
 		id,
 		name
-	)
-VALUES
-	(
-		class.id,
-		class.name
-	)
+	) 
+SELECT
+	id,
+	name
+FROM
+	class_B
+ON DUPLICATE KEY UPDATE 
+	id = class_B.id,
+	name = class_B.name
 ;
+
+出力結果：
+select * from class_A;
++----+--------+
+| id | name   |
++----+--------+
+|  1 | 田中   |
+|  2 | 内海   |
+|  3 | 伊集院 |
+|  4 | 西園寺 |
++----+--------+

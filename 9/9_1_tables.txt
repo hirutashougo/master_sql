@@ -1,0 +1,69 @@
+CREATE TABLE
+	tbl_A
+	(
+		key_id CHAR(1) PRIMARY KEY,
+		col_1 INT,
+		col_2 INT,
+		col_3 INT
+	)
+;
+
+INSERT INTO
+	tbl_A
+VALUES
+	('A', 2, 3, 4),
+	('B', 0, 7, 9),
+	('C', 5, 1, 6)
+;
+
++--------+-------+-------+-------+
+| key_id | col_1 | col_2 | col_3 |
++--------+-------+-------+-------+
+| A      |     2 |     3 |     4 |
+| B      |     0 |     7 |     9 |
+| C      |     5 |     1 |     6 |
++--------+-------+-------+-------+
+
+CREATE TABLE
+	tbl_B
+	(
+		key_id CHAR(1) PRIMARY KEY,
+		col_1 INT,
+		col_2 INT,
+		col_3 INT
+	)
+;
+
+INSERT INTO
+	tbl_B
+VALUES
+	('A', 2, 3, 4),
+	('B', 0, 7, 9),
+	('C', 5, 1, 6)
+;
+
++--------+-------+-------+-------+
+| key_id | col_1 | col_2 | col_3 |
++--------+-------+-------+-------+
+| A      |     2 |     3 |     4 |
+| B      |     0 |     7 |     9 |
+| C      |     5 |     1 |     6 |
++--------+-------+-------+-------+
+
+CREATE TABLE
+	tbl_B
+	(
+		key_id CHAR(1) PRIMARY KEY,
+		col_1 INT,
+		col_2 INT,
+		col_3 INT
+	)
+;
+
+INSERT INTO
+	tbl_B
+VALUES
+	('A', 2, 3, 4),
+	('B', 0, 7, 8),
+	('C', 5, 1, 6)
+;

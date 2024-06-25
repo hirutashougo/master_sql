@@ -1,0 +1,126 @@
+
+・折り返しなし
+
+SELECT
+	S1.seat AS start_seat, '～', S2.seat AS end_seat
+FROM
+	Seats AS S1,
+	Seats AS S2
+WHERE
+	S2.seat = S1.seat + (3-1)
+AND
+	NOT EXISTS
+	(
+		SELECT
+			*
+		FROM
+			Seats AS S3
+		WHERE
+			S3.seat BETWEEN S1.seat AND S2.seat
+		AND
+			S3.status <> '空'
+	)
+;
+
++------------+----+----------+
+| start_seat | ～ | end_seat |
++------------+----+----------+
+|          3 | ～ |        5 |
+|          7 | ～ |        9 |
+|          8 | ～ |       10 |
+|          9 | ～ |       11 |
++------------+----+----------+
+
+
+SELECT
+	(
+		
+	)
+FROM
+	Seats AS S1,
+	Seats AS S2
+GROUP BY
+	seat
+HAVING
+	
+;
+
+--------------------------------------------------------
+
+SELECT
+	S1.seat AS start_seat, '～', S2.seat AS end_seat
+FROM
+	Seats AS S1,
+	Seats AS S2,
+	Seats AS S3
+WHERE
+	S2.seat = S1.seat + 2
+AND
+	S3.seat BETWEEN S1.seat AND S2.seat
+AND
+	S3.status = '空'
+AND
+	S1.status = '空'
+AND
+	S2.status = '空'
+GROUP BY
+	S1.seat
+HAVING
+	COUNT(*) = 3
+;
+
+----------------------------------------------------------
+
+SELECT
+	S1.seat AS start_seat, '～', S2.seat AS end_seat
+FROM
+	Seats AS S1,
+	Seats AS S2,
+	Seats AS S3
+WHERE
+	S2.seat = S1.seat + 2
+AND
+	S3.seat BETWEEN S1.seat AND S2.seat
+AND
+	'空' = ALL(S1.status, S2.status, S3.status)
+GROUP BY
+	S1.seat
+HAVING
+	COUNT(*) = 3
+;
+
+
+・折り返しあり
+
+SELECT
+	S1.seat AS start_seat, '～', S2.seat AS end_seat
+FROM
+	Seats2 AS S1,
+	Seats2 AS S2
+WHERE
+	S2.seat = S1.seat + (3-1)
+AND
+	NOT EXISTS
+	(
+		SELECT
+			*
+		FROM
+			Seats2 AS S3
+		WHERE
+			S3.seat BETWEEN S1.seat AND S2.seat
+		AND
+			(
+					S3.status <> '空'
+				OR
+					S3.line_id <> S1.line_id
+			)
+	)
+;
+
++------------+----+----------+
+| start_seat | ～ | end_seat |
++------------+----+----------+
+|          3 | ～ |        5 |
+|          8 | ～ |       10 |
+|         11 | ～ |       13 |
++------------+----+----------+

@@ -1,0 +1,110 @@
+SELECT
+	COUNT(*) AS row_cnt
+FROM
+	(
+		SELECT
+			*
+		FROM
+			tbl_A
+		UNION
+		SELECT
+			*
+		FROM
+			tbl_B
+	) AS TMP
+;
+
+SELECT
+	CASE WHEN
+		
+	THEN
+		
+	ELSE
+FROM
+	(
+		SELECT
+			*
+		FROM
+			tbl_A
+		UNION
+		SELECT
+			*
+		FROM
+			tbl_B
+	) AS TMP
+;
+
+SELECT
+	CASE WHEN
+		COUNT(DISTINCT key_id) = COUNT(*)
+	THEN
+		'一致'
+	ELSE
+		'不一致'
+	END AS judgement
+FROM
+	(
+		SELECT
+			*
+		FROM
+			tbl_A
+		UNION
+		SELECT
+			*
+		FROM
+			tbl_B
+	) AS TMP
+;
+
+
+SELECT
+	COUNT(DISTINCT key_id)
+FROM
+	(
+		SELECT
+			*
+		FROM
+			tbl_A
+		UNION
+		SELECT
+			*
+		FROM
+			tbl_B
+	) AS TMP
+;
+
+
+
+
+SELECT
+	*
+FROM
+	(
+		SELECT
+			*
+		FROM
+			tbl_A
+		UNION
+		SELECT
+			*
+		FROM
+			tbl_B
+	) AS TMP
+;
+
++--------+-------+-------+-------+
+| key_id | col_1 | col_2 | col_3 |
++--------+-------+-------+-------+
+| A      |     2 |     3 |     4 |
+| B      |     0 |     7 |     9 |
+| C      |     5 |     1 |     6 |
++--------+-------+-------+-------+
+
++--------+-------+-------+-------+
+| key_id | col_1 | col_2 | col_3 |
++--------+-------+-------+-------+
+| A      |     2 |     3 |     4 |
+| B      |     0 |     7 |     9 |
+| C      |     5 |     1 |     6 |
+| B      |     0 |     7 |     8 |
++--------+-------+-------+-------+

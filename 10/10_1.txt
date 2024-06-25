@@ -1,0 +1,55 @@
+・NOT EXISTSを用いた場合
+/*TblSeqテーブルの、1～12における欠番を取得*/
+SELECT
+	seq
+FROM
+	Sequence AS S
+WHERE
+	/*1～12の間の連番*/
+	seq BETWEEN 1 AND 12
+AND
+	NOT EXISTS
+	(
+		SELECT
+			seq
+		FROM
+			SeqTbl AS ST
+		WHERE
+			S.seq = ST.seq
+	)
+;
+
+出力結果：
++-----+
+| seq |
++-----+
+|   3 |
+|   9 |
+|  10 |
++-----+
+
+・外部結合を用いた場合
+/*TblSeqテーブルの、1～12における欠番を取得*/
+SELECT
+	S.seq
+FROM
+	Sequence AS S
+LEFT OUTER JOIN
+	SeqTbl AS ST
+ON
+	S.seq = ST.seq
+WHERE
+	/*1～12の間の連番*/
+	S.seq BETWEEN 1 AND 12
+AND
+	ST.seq IS NULL
+;
+
+出力結果：
++-----+
+| seq |
++-----+
+|   3 |
+|   9 |
+|  10 |
++-----+

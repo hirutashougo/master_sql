@@ -1,0 +1,29 @@
+/*2つのテーブルの行数が同じであれば'一致'
+	そうでなければ'不一致'と表示する*/
+SELECT
+	CASE WHEN
+		COUNT(DISTINCT key_id) = COUNT(*)
+	THEN
+		'一致'
+	ELSE
+		'不一致'
+	END AS judgement
+FROM
+	(
+		SELECT
+			*
+		FROM
+			tbl_A
+		UNION
+		SELECT
+			*
+		FROM
+			tbl_B
+	) AS TMP
+;
+
++-----------+
+| judgement |
++-----------+
+| 一致      |
++-----------+

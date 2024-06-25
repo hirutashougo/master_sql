@@ -1,0 +1,86 @@
+CREATE TABLE
+	SeqTbl
+	(
+		seq INT PRIMARY KEY
+	)
+;
+
+INSERT INTO
+	SeqTbl
+VALUES
+	(0),(1),(2),(4),(5),(6),(7),(8),(11),(12)
+;
+
+
++-----+
+| seq |
++-----+
+|   1 |
+|   2 |
+|   4 |
+|   5 |
+|   6 |
+|   7 |
+|   8 |
+|  11 |
+|  12 |
++-----+
+
+
+
+CREATE TABLE
+	Digits
+	(
+		digits INT PRIMARY KEY
+	)
+;
+
+INSERT INTO
+	Digits
+VALUES
+	(0),(1),(2),(3),(4),(5),(6),(7),(8),(9)
+;
+
+
+CREATE VIEW
+	Sequence
+	(
+		seq
+	) AS
+SELECT
+	D1.digits + (D2.digits * 10) + (D3.digits * 100)
+FROM
+	Digits AS D1
+CROSS JOIN
+	Digits AS D2
+CROSS JOIN
+	Digits AS D3
+;
+
++--------+
+| digits |
++--------+
+|      1 |
+|      2 |
+|      3 |
+|      4 |
+|      5 |
+|      6 |
+|      7 |
+|      8 |
+|      9 |
++--------+
+
+
+
+SELECT
+	*
+FROM
+	Sequence
+WHERE
+	seq >= 1
+AND
+	seq <= 100
+ORDER BY
+	seq
+;
