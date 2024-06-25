@@ -1,0 +1,90 @@
+	SELECT
+		employee,
+		child_1 AS child
+	FROM
+		personnel
+UNION ALL
+	SELECT
+		employee,
+		child_2 AS child
+	FROM
+		personnel
+UNION ALL
+	SELECT
+		employee,
+		child_3 AS child
+	FROM
+		personnel
+;
+
+
+SELECT
+	employee,
+	(
+		SELECT
+			SUM
+			(
+				CASE WHEN 
+			)
+		FROM
+			personnel
+		GROUP BY
+			employee
+	)
+FROM
+	personnel
+;
+
+
+
+SELECT
+	employee,
+	COUNT(child_1)
+FROM
+	personnel
+GROUP BY
+	employee
+UNION ALL
+SELECT
+	employee,
+	COUNT(child_2)
+FROM
+	personnel
+GROUP BY
+	employee
+UNION ALL
+SELECT
+	employee,
+	COUNT(child_3)
+FROM
+	personnel
+GROUP BY
+	employee
+;
+
+SELECT
+	employee,
+	COUNT(child)
+FROM
+(
+	SELECT
+		employee,
+		child_1 AS child
+	FROM
+		personnel
+UNION ALL
+	SELECT
+		employee,
+		child_2 AS child
+	FROM
+		personnel
+UNION ALL
+	SELECT
+		employee,
+		child_3 AS child
+	FROM
+		personnel
+) AS pl
+GROUP BY
+	employee
+;

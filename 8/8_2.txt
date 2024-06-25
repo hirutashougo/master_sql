@@ -1,0 +1,38 @@
+SELECT
+	employee,
+	COUNT(child) AS child_cnt
+FROM
+	(
+		SELECT
+			employee,
+			child_1 AS child
+		FROM
+			personnel
+	UNION ALL
+		SELECT
+			employee,
+			child_2 AS child
+		FROM
+			personnel
+	UNION ALL
+		SELECT
+			employee,
+			child_3 AS child
+		FROM
+			personnel
+	) AS pl
+GROUP BY
+	employee
+ORDER BY
+	COUNT(child) DESC
+;
+
+
++----------+-----------+
+| employee | child_cnt |
++----------+-----------+
+| 赤井     |         3 |
+| 工藤     |         2 |
+| 鈴木     |         1 |
+| 吉田     |         0 |
++----------+-----------+

@@ -1,0 +1,28 @@
+MERGE INTO
+	class_A AS cA
+USING
+	(
+		SELECT
+			id,
+			name
+		FROM
+			class_B AS cB
+	) AS class
+ON
+	cA.id = class.id
+WHEN MATCHED THEN
+UPDATE SET
+		cA.id = cB.id,
+		cA.name = cB.name
+WHEN NOT MATCHED THEN
+	INSERT
+	(
+		id,
+		name
+	)
+VALUES
+	(
+		class.id,
+		class.name
+	)
+;

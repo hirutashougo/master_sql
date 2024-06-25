@@ -1,0 +1,47 @@
+CREATE TABLE
+	class_A
+	(
+		id INT PRIMARY KEY,
+		name CHAR(10)
+	)
+;
+
+INSERT INTO
+	class_A
+VALUES
+	(1, '田中'),
+	(2, '鈴木'),
+	(3, '伊集院')
+;
+
++----+--------+
+| id | name   |
++----+--------+
+|  1 | 田中   |
+|  2 | 鈴木   |
+|  3 | 伊集院 |
++----+--------+
+
+CREATE TABLE
+	class_B
+	(
+		id INT PRIMARY KEY,
+		name CHAR(10)
+	)
+;
+
+INSERT INTO
+	class_B
+VALUES
+	(1, '田中'),
+	(2, '内海'),
+	(4, '西園寺')
+;
+
++----+--------+
+| id | name   |
++----+--------+
+|  1 | 田中   |
+|  2 | 内海   |
+|  4 | 西園寺 |
++----+--------+

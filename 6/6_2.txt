@@ -8,3 +8,9 @@ HAVING
 	COUNT(*) = SUM(CASE WHEN submit_date < '2018-10-1' THEN 1
 			ELSE 0 END)
 ;
+
++--------------+
+| department   |
++--------------+
+| keizaigakubu |
++--------------+

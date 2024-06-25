@@ -1,0 +1,55 @@
+SELECT
+	age_class AS age_class,
+	sex_cd AS sex_cd,
+	pop_tohoku AS pop_tohoku,
+	pop_kanto AS pop_kanto
+FROM
+	(
+		SELECT
+			MASTER.age_class,
+			MASTER.sex_cd,
+			SUM(
+					CASE WHEN pref_name IN ('青森', '秋田')
+					THEN population ELSE NULL END
+				) AS pop_tohoku,
+			SUM(
+					CASE WHEN pref_name IN ('東京', '千葉')
+					THEN population ELSE NULL END
+				) AS pop_kanto
+		FROM
+			(
+				SELECT
+					TA.age_class,
+					TS.sex_cd
+				FROM
+					TblAge AS TA
+				CROSS JOIN
+					TblSex AS TS
+			) AS MASTER
+		LEFT OUTER JOIN
+			TblPop AS DATA
+		ON
+			MASTER.age_class = DATA.age_class
+		AND
+			MASTER.sex_cd = DATA.sex_cd
+		GROUP BY
+			age_class,
+			sex_cd
+	) AS Tbl
+ORDER BY
+	age_class,
+	sex_cd
+;
+
+
++-----------+--------+------------+-----------+
+| age_class | sex_cd | pop_tohoku | pop_kanto |
++-----------+--------+------------+-----------+
+|         1 | f      |       1300 |      2500 |
+|         1 | m      |       1100 |      1800 |
+|         2 | f      |       NULL |      NULL |
+|         2 | m      |       NULL |      NULL |
+|         3 | f      |       1800 |      2100 |
+|         3 | m      |       1000 |      NULL |
++-----------+--------+------------+-----------+
+
