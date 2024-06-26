@@ -1,3 +1,4 @@
+・Seatsテーブルの作成
 CREATE TABLE
 	Seats
 	(
@@ -6,6 +7,7 @@ CREATE TABLE
 	)
 ;
 
+・Seatsテーブルへのデータの挿入
 INSERT INTO
 	Seats
 VALUES
@@ -26,7 +28,7 @@ VALUES
 	(15, '空')
 ;
 
-
+・テーブル内容
 +------+--------+
 | seat | status |
 +------+--------+
@@ -48,6 +50,7 @@ VALUES
 +------+--------+
 
 
+・Seats2テーブルの作成
 CREATE TABLE
 	Seats2
 	(
@@ -57,6 +60,7 @@ CREATE TABLE
 	)
 ;
 
+・Seats2テーブルへのデータの挿入
 INSERT INTO
 	Seats2
 VALUES
@@ -77,6 +81,7 @@ VALUES
 	(15, 'C', '空')
 ;
 
+・テーブル内容
 +------+---------+--------+
 | seat | line_id | status |
 +------+---------+--------+

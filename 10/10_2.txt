@@ -1,0 +1,65 @@
+・折り返しなしの場合
+/*3人連続で座れる席の組み合わせを取得する(席列の折り返しなし)*/
+SELECT
+	S1.seat AS start_seat, '～', S2.seat AS end_seat
+FROM
+	Seats AS S1,
+	Seats AS S2,
+	Seats AS S3
+WHERE
+	/*先頭の席番号から2席分(連続する3席)*/
+	S2.seat = S1.seat + 2
+AND
+	S3.seat BETWEEN S1.seat AND S2.seat
+AND
+	S3.status = '空'
+AND
+	S1.status = '空'
+AND
+	S2.status = '空'
+GROUP BY
+	S1.seat
+HAVING
+	/*連続する3席*/
+	COUNT(*) = 3
+;
+
+出力結果：
+
+
+・折り返しありの場合
+/*3人連続で座れる席の組み合わせを取得する(席列の折り返しあり)*/
+SELECT
+	S1.seat AS start_seat, '～', S2.seat AS end_seat
+FROM
+	Seats2 AS S1,
+	Seats2 AS S2,
+	Seats2 AS S3
+WHERE
+	/*先頭の席番号から2席分(連続する3席)*/
+	S2.seat = S1.seat + 2
+AND
+	S3.seat BETWEEN S1.seat AND S2.seat
+AND
+	S3.status = '空'
+AND
+	S1.status = '空'
+AND
+	S2.status = '空'
+AND
+	S3.line_id = S1.line_id
+GROUP BY
+	S1.seat
+HAVING
+	/*連続する3席*/
+	COUNT(*) = 3
+;
+
+出力結果：
++------------+----+----------+
+| start_seat | ～ | end_seat |
++------------+----+----------+
+|          3 | ～ |        5 |
+|          8 | ～ |       10 |
+|         11 | ～ |       13 |
++------------+----+----------+
