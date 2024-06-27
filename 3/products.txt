@@ -1,3 +1,7 @@
+DROP TABLE
+	products
+;
+
 CREATE TABLE
 	products
 	(

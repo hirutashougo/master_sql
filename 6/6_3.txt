@@ -1,3 +1,10 @@
+問題
+
+品物を全て揃えなかった店舗と品物の不足数を一覧表示する
+
+
+回答
+
 SELECT
 	SI.shop,
 	COUNT(I.item) AS my_item_cnt,

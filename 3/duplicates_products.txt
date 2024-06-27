@@ -1,3 +1,7 @@
+DROP TABLE
+	duplicates_products
+;
+
 CREATE TABLE
 	duplicates_products
 	(

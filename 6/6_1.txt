@@ -1,3 +1,10 @@
+問題
+
+seq_tablesテーブルにて、seqの番号が歯抜けになっているか判定せよ
+
+
+回答
+
 SELECT
 	CASE WHEN COUNT(*) <> MAX(seq) THEN '歯抜けあり'
 	ELSE '歯抜けなし'

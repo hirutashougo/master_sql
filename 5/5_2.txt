@@ -1,3 +1,10 @@
+問題
+
+Prpjectsテーブルにて、工程1番まで完了しているプロジェクトを選択
+
+
+回答
+
 SELECT
 	project_id
 FROM

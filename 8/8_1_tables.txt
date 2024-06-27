@@ -1,5 +1,9 @@
+DROP TABLE
+	table_ages
+;
+
 CREATE TABLE
-	TblAge
+	table_ages
 	(
 		age_class INT PRIMARY KEY,
 		age_range CHAR(10)
@@ -7,7 +11,7 @@ CREATE TABLE
 ;
 
 INSERT INTO
-	TblAge
+	table_ages
 VALUES
 	(1,'21～30歳'),
 	(2,'31～40歳'),
@@ -22,8 +26,13 @@ VALUES
 |         3 | 41～50歳  |
 +-----------+-----------+
 
+
+DROP TABLE
+	table_sexes
+;
+
 CREATE TABLE
-	TblSex
+	table_sexes
 	(
 		sex_cd CHAR(1) PRIMARY KEY,
 		sex CHAR(1)
@@ -31,7 +40,7 @@ CREATE TABLE
 ;
 
 INSERT INTO
-	TblSex
+	table_sexes
 VALUES
 	('m','男'),
 	('f','女')
@@ -44,8 +53,12 @@ VALUES
 | m      | 男   |
 +--------+------+
 
+DROP TABLE
+	populations
+;
+
 CREATE TABLE
-	TblPop
+	populations
 	(
 		pref_name CHAR(2),
 		age_class INT,
@@ -56,7 +69,7 @@ CREATE TABLE
 ;
 
 INSERT INTO
-	TblPop
+	populations
 VALUES
 	('秋田', 1, 'm', 400),
 	('秋田', 3, 'm', 1000),

@@ -1,5 +1,9 @@
+DROP TABLE
+	A_class_students
+;
+
 CREATE TABLE
-	class_A
+	A_class_students
 	(
 		id INT PRIMARY KEY,
 		name CHAR(10)
@@ -7,7 +11,7 @@ CREATE TABLE
 ;
 
 INSERT INTO
-	class_A
+	A_class_students
 VALUES
 	(1, '田中'),
 	(2, '鈴木'),
@@ -22,8 +26,12 @@ VALUES
 |  3 | 伊集院 |
 +----+--------+
 
+DROP TABLE
+	B_class_students
+;
+
 CREATE TABLE
-	class_B
+	B_class_students
 	(
 		id INT PRIMARY KEY,
 		name CHAR(10)
@@ -31,7 +39,7 @@ CREATE TABLE
 ;
 
 INSERT INTO
-	class_B
+	B_class_students
 VALUES
 	(1, '田中'),
 	(2, '内海'),

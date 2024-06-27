@@ -1,6 +1,9 @@
+DROP TABLE
+	PopTbl2
+;
 
 CREATE TABLE
-	pop_tables_2
+	PopTbl2
 	(
 		prefecture_name CHAR(4),
 		sex INT NOT NULL,
@@ -10,7 +13,7 @@ CREATE TABLE
 ;
 
 INSERT INTO
-	pop_tables_2
+	PopTbl2
 VALUES
 	('徳島', 1, 60),
 	('徳島', 2, 40),
@@ -35,7 +38,7 @@ SELECT
 	sex AS 性別,
 	population AS 人口
 FROM
-	pop_tables_2
+	PopTbl2
 ORDER BY
 	CASE prefecture_name
 	WHEN '徳島' THEN 1
@@ -48,3 +51,24 @@ ORDER BY
 	WHEN '東京' THEN 8
 	END
 ;
+
++------+------+------+
+| 県名 | 性別 | 人口 |
++------+------+------+
+| 徳島 |    1 |   60 |
+| 徳島 |    2 |   40 |
+| 香川 |    2 |  100 |
+| 香川 |    1 |  100 |
+| 愛媛 |    1 |  100 |
+| 愛媛 |    2 |   50 |
+| 高知 |    2 |  100 |
+| 高知 |    1 |  100 |
+| 福岡 |    2 |  200 |
+| 福岡 |    1 |  100 |
+| 佐賀 |    2 |   80 |
+| 佐賀 |    1 |   20 |
+| 長崎 |    1 |  125 |
+| 長崎 |    2 |  125 |
+| 東京 |    2 |  150 |
+| 東京 |    1 |  250 |
++------+------+------+

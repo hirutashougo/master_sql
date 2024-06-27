@@ -1,3 +1,10 @@
+問題
+
+全員が9月中に提出済みの学部を選択せよ
+
+
+回答
+
 SELECT
 	department
 FROM
@@ -8,9 +15,3 @@ HAVING
 	COUNT(*) = SUM(CASE WHEN submit_date < '2018-10-1' THEN 1
 			ELSE 0 END)
 ;
-
-+--------------+
-| department   |
-+--------------+
-| keizaigakubu |
-+--------------+

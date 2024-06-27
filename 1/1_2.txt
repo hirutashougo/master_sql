@@ -1,4 +1,4 @@
-/*pop_tables_2テーブルから、四国の人口の合計を抽出して表示*/
+/*PopTbl2テーブルから、四国の人口の合計を抽出して表示*/
 SELECT
 	CASE sex WHEN 1 THEN '男' ELSE '女' END AS 性別,
 	SUM(population) AS 全国,
@@ -38,7 +38,7 @@ SELECT
 		END
 	) AS '四国(再掲)'
 FROM
-	pop_tables_2
+	PopTbl2
 GROUP BY
 	sex
 ;

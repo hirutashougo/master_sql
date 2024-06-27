@@ -1,3 +1,7 @@
+DRP TABLE
+	test_scores
+;
+
 CREATE TABLE
 	test_scores
 	(

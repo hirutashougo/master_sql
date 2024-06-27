@@ -1,3 +1,7 @@
+DROP TABLE
+	projects
+;
+
 CREATE TABLE
 	projects
 	(

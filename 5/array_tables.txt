@@ -1,3 +1,7 @@
+DROP TABLE
+	arry_tables
+;
+
 1.テーブルの作成
 
 CREATE TABLE

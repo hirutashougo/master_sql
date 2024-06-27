@@ -1,4 +1,4 @@
-ServerLoadSample(手書き)
+ServerLoadSamples(手書き)
 
 server		sample_date		load_val
 -------------------------------------

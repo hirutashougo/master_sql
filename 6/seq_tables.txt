@@ -1,3 +1,7 @@
+Drop table
+	seq_tables
+;
+
 CREATE TABLE
 	seq_tables
 	(

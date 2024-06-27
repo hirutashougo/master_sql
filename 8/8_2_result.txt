@@ -1,10 +1,3 @@
-問題
-
-personnelテーブルから、社員一人当たりの子供の数を取得せよ
-
-
-回答
-/*社員一人当たりのお供の数を取得する*/
 SELECT
 	employee,
 	COUNT(child) AS child_cnt

@@ -1,3 +1,7 @@
+DROP TABLE
+	personnel
+;
+
 CREATE TABLE
 	personnel
 	(
