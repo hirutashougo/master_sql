@@ -1,7 +1,10 @@
+/*greatestsテーブルが存在する場合、テーブルを削除*/
 DROP TABLE
+IF EXISTS
 	greatests
 ;
 
+/*greatestsテーブルを作成*/
 CREATE TABLE
 	greatests
 	(
@@ -12,6 +15,7 @@ CREATE TABLE
 	)
 ;
 
+/*greatestsテーブルに値を挿入*/
 INSERT INTO
 	greatests
 VALUES

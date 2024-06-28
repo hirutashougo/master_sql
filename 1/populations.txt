@@ -1,0 +1,38 @@
+/*populationsテーブルが存在する場合、テーブルを削除*/
+DROP TABLE
+IF EXISTS
+	populations
+;
+
+/*populationsテーブルを作成*/
+CREATE TABLE
+	populations
+	(
+		prefecture_name CHAR(4),
+		sex INT NOT NULL,
+		population INT,
+		PRIMARY KEY(prefecture_name, sex)
+	)
+;
+
+/*populationsテーブルに値を挿入*/
+INSERT INTO
+	populations
+VALUES
+	('徳島', 1, 60),
+	('徳島', 2, 40),
+	('香川', 1, 100),
+	('香川', 2, 100),
+	('愛媛', 1, 100),
+	('愛媛', 2, 50),
+	('高知', 1, 100),
+	('高知', 2, 100),
+	('福岡', 1, 100),
+	('福岡', 2, 200),
+	('佐賀', 1, 20),
+	('佐賀', 2, 80),
+	('長崎', 1, 125),
+	('長崎', 2, 125),
+	('東京', 1, 250),
+	('東京', 2, 150)
+;

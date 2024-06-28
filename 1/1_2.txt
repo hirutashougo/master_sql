@@ -1,11 +1,23 @@
-/*PopTbl2テーブルから、四国の人口の合計を抽出して表示*/
+問題
+
+populationsテーブルから、全国と四国・四国の各県の人口を男女別に抽出せよ
+
+
+回答
+
+/*全国と四国・四国の各県の人口を男女別に抽出*/
 SELECT
-	CASE sex WHEN 1 THEN '男' ELSE '女' END AS 性別,
+	CASE sex 
+		/*性別が男を表す1*/
+		WHEN 1 THEN '男' 
+		ELSE '女' 
+	END AS 性別,
 	SUM(population) AS 全国,
 	SUM
 	(
 		CASE
 			WHEN prefecture_name = '徳島' THEN population
+			/*徳島でない場合は人口0として扱う*/
 			ELSE 0
 		END
 	) AS '徳島',
@@ -13,6 +25,7 @@ SELECT
 	(
 		CASE
 			WHEN prefecture_name = '香川' THEN population
+			/*香川でない場合は人口0として扱う*/
 			ELSE 0
 		END
 	) AS '香川',
@@ -20,6 +33,7 @@ SELECT
 	(
 		CASE
 			WHEN prefecture_name = '愛媛' THEN population
+			/*愛媛でない場合は人口0として扱う*/
 			ELSE 0
 		END
 	) AS '愛媛',
@@ -27,6 +41,7 @@ SELECT
 	(
 		CASE
 			WHEN prefecture_name = '高知' THEN population
+			/*高知でない場合は人口0として扱う*/
 			ELSE 0
 		END
 	) AS '高知',
@@ -34,11 +49,12 @@ SELECT
 	(
 		CASE
 			WHEN prefecture_name IN ('徳島', '香川', '愛媛', '高知') THEN population
+			/*徳島・香川・愛媛・高知でない場合は人口0として扱う*/
 			ELSE 0
 		END
 	) AS '四国(再掲)'
 FROM
-	PopTbl2
+	populations
 GROUP BY
 	sex
 ;

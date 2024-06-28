@@ -1,3 +1,10 @@
+問題
+
+greatestsテーブルのキーをB,A,D,Cの順に表示せよ
+
+
+回答
+
 /*表示をB-A-D-Cの順にする*/
 SELECT
 	ids AS 'key'
@@ -5,14 +12,14 @@ FROM
 	greatests
 ORDER BY
 	CASE ids
-	/*Bを1番目に表示*/
-	WHEN 'B' THEN 1
-	/*Aを2番目に表示*/
-	WHEN 'A' THEN 2
-	/*Dを3番目に表示*/
-	WHEN 'D' THEN 3
-	/*Cを4番目に表示*/
-	WHEN 'C' THEN 4
+		/*Bを1番目に表示*/
+		WHEN 'B' THEN 1
+		/*Aを2番目に表示*/
+		WHEN 'A' THEN 2
+		/*Dを3番目に表示*/
+		WHEN 'D' THEN 3
+		/*Cを4番目に表示*/
+		WHEN 'C' THEN 4
 	END
 ;
 

@@ -1,9 +1,10 @@
 DROP TABLE
-	PopTbl2
+IF EXISTS
+	populations
 ;
 
 CREATE TABLE
-	PopTbl2
+	populations
 	(
 		prefecture_name CHAR(4),
 		sex INT NOT NULL,
@@ -13,7 +14,7 @@ CREATE TABLE
 ;
 
 INSERT INTO
-	PopTbl2
+	populations
 VALUES
 	('徳島', 1, 60),
 	('徳島', 2, 40),
@@ -38,7 +39,7 @@ SELECT
 	sex AS 性別,
 	population AS 人口
 FROM
-	PopTbl2
+	populations
 ORDER BY
 	CASE prefecture_name
 	WHEN '徳島' THEN 1
