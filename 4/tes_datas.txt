@@ -1,0 +1,43 @@
+/*test_datasテーブルが存在した場合、削除する*/
+DROP TABLE IF EXISTS
+	test_datas
+;
+
+/*test_datasテーブルを作成*/
+CREATE TABLE
+	test_datas
+	(
+		number INT,
+		name CHAR(10)
+	)
+;
+
+/*test_datasテーブルに値を挿入*/
+INSERT INTO
+	test_datas
+VALUES
+	(
+		1,'あい'
+	),
+	(
+		3,'わん'
+	),
+	(
+		10,'xyz'
+	),
+	(
+		8,'。：'
+	),
+	(
+		NULL, NULL
+	),
+	(
+		-1, '123'
+	),
+	(
+		0, '987'
+	),
+	(
+		-10, '-100'
+	)
+;

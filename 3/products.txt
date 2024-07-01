@@ -1,7 +1,9 @@
-DROP TABLE
+/*productsテーブルが存在する場合、テーブルを削除*/
+DROP TABLE IF EXISTS
 	products
 ;
 
+/*productsテーブルを作成*/
 CREATE TABLE
 	products
 	(
@@ -11,6 +13,7 @@ CREATE TABLE
 	)
 ;
 
+/*productsテーブルに値を挿入*/
 INSERT INTO
 	products
 VALUES

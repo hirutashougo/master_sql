@@ -1,7 +1,9 @@
+/*duplicates_productsテーブルが存在する場合、テーブルを削除*/
 DROP TABLE
 	duplicates_products
 ;
 
+/*duplicates_productsテーブルを作成*/
 CREATE TABLE
 	duplicates_products
 	(
@@ -10,6 +12,7 @@ CREATE TABLE
 	)
 ;
 
+/*duplicates_productsテーブルに値を挿入*/
 INSERT INTO
 	duplicates_products
 VALUES

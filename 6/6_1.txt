@@ -1,14 +1,16 @@
 問題
 
-seq_tablesテーブルにて、seqの番号が歯抜けになっているか判定せよ
+sequencesテーブルにて、seqの番号が歯抜けになっているか判定せよ
 
 
 回答
 
+/*sequencesテーブルの主キーが歯抜けかどうか判定する*/
 SELECT
-	CASE WHEN COUNT(*) <> MAX(seq) THEN '歯抜けあり'
-	ELSE '歯抜けなし'
+	CASE
+		WHEN COUNT(*) <> MAX(seq) THEN '歯抜けあり'
+		ELSE '歯抜けなし'
 	END AS 'jutge'
 FROM
-	seq_tables
+	sequences
 ;

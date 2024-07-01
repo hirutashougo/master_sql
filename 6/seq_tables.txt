@@ -1,9 +1,9 @@
 Drop table
-	seq_tables
+	sequences
 ;
 
 CREATE TABLE
-	seq_tables
+	sequences
 	(
 		seq INT PRIMARY KEY,
 		name CHAR(5)
@@ -11,7 +11,7 @@ CREATE TABLE
 ;
 
 INSERT INTO
-	seq_tables
+	sequences
 VALUES
 	(1,'dick'),
 	(2,'ann'),
@@ -33,7 +33,7 @@ VALUES
 +-----+-------+
 
 INSERT INTO
-	seq_tables
+	sequences
 VALUES
 	(1,'dick'),
 	(2,'ann'),

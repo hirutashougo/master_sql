@@ -1,36 +1,32 @@
-1.まず、元のテーブル(products)の行に対して、
-	一意な識別子を付与したテーブル(duplicates_products)を作成する。
+1.これから作成するduplicates_productsというテーブルがあれば削除する。
 
+/*duplicates_productsが存在すれば削除する*/
+DROP TABLE IF EXISTS
+	duplicates_products
+;
+
+2.元となるテーブル(products)の行に対して、
+	一意な識別子を付与したテーブル(duplicates_products)を作成する。
+	
+/*productsに一意な識別子を付与したduplicates_productsテーブルを作成する*/
 CREATE TABLE
 	duplicates_products
 	(
 	SELECT
 		*,
-		COUNT(name) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS id
+		COUNT(name) OVER 
+		(
+			ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+		) AS id
 	FROM
-		duplicates_products
+		products
 	)
 ;
 
-select * from duplicates_products;
-+--------+-------+----+
-| name   | price | id |
-+--------+-------+----+
-| みかん |   100 |  1 |
-| みかん |   100 |  2 |
-| みかん |   100 |  3 |
-| りんご |    50 |  4 |
-| バナナ |    80 |  5 |
-+--------+-------+----+
-
-2.元のテーブル(products)を削除する。
-
-DROP TABLE
-	products
-;
 
 3.重複した行を削除する。
 
+/*テーブル内の重複した行を削除する*/
 DELETE FROM
 	duplicates_products
 WHERE
@@ -48,45 +44,12 @@ WHERE
 	)
 ;
 
-+--------+-------+----+
-| name   | price | id |
-+--------+-------+----+
-| みかん |   100 |  3 |
-| りんご |    50 |  4 |
-| バナナ |    80 |  5 |
-+--------+-------+----+
 
 4.識別子を削除する。
 
+/*テーブル内の識別子を削除する*/
 ALTER TABLE 
 	duplicates_products
 DROP COLUMN
 	category
 ;
-
-select * from duplicates_products;
-+--------+-------+
-| name   | price |
-+--------+-------+
-| みかん |   100 |
-| りんご |    50 |
-| バナナ |    80 |
-+--------+-------+
-
-5.名前を元(products)に戻す。
-
-RENAME TABLE
-	duplicates_products
-TO
-	products
-;
-
-
-select * from products;
-+--------+-------+
-| name   | price |
-+--------+-------+
-| みかん |   100 |
-| りんご |    50 |
-| バナナ |    80 |
-+--------+-------+

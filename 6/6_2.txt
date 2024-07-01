@@ -5,6 +5,7 @@
 
 回答
 
+/*studentsテーブルで、全員が9月中に提出済みの学部を選択する*/
 SELECT
 	department
 FROM
@@ -12,6 +13,13 @@ FROM
 GROUP BY
 	department
 HAVING
-	COUNT(*) = SUM(CASE WHEN submit_date < '2018-10-1' THEN 1
-			ELSE 0 END)
+	COUNT(*) =
+	SUM(
+			CASE
+				/*2018年10月1日より前に提出済みの生徒を1とする*/
+				WHEN submit_date < '2018-10-1' THEN 1
+				/*2018年10月1日より前に提出済みでないの生徒を0とする*/
+				ELSE 0 
+			END
+		)
 ;

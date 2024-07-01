@@ -1,24 +1,12 @@
 SQL文
 /*productsテーブルのname(商品名)の重複組み合わせを表示*/
 SELECT
-	fist_products.name AS name_1,
+	first_products.name AS name_1,
 	second_products.name AS name_2
 FROM
-	products fist_products
+	products first_products
 INNER JOIN
 	products second_products
 ON
-	fist_products.name >= second_products.name
+	first_products.name >= second_products.name
 ;
-
-出力結果
-+--------+--------+
-| name_1 | name_2 |
-+--------+--------+
-| みかん | みかん |
-| りんご | みかん |
-| りんご | りんご |
-| バナナ | みかん |
-| バナナ | りんご |
-| バナナ | バナナ |
-+--------+--------+

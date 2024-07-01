@@ -1,3 +1,10 @@
+/*duplicates_productsテーブルの全要素を取得*/
+SELECT
+	*
+FROM
+	duplicates_products
+;
+
 出力結果：
 +--------+-------+
 | name   | price |

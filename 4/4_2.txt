@@ -8,21 +8,25 @@ NULLと文字列を結合したときにどのような値になるか
 
 NULLになる。
 
+
+/*NULLを文字列と結合して表示する*/
 SELECT
 	'abc' || NULL AS string
 ;
 
+NULLになった。
 +--------+
 | string |
 +--------+
 |   NULL |
 +--------+
 
-
+/*空文字をNULLと結合して表示する*/
 SELECT
 	'' || NULL AS string
 ;
 
+NULLになった。
 +--------+
 | string |
 +--------+

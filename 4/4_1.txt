@@ -8,50 +8,17 @@ NULLがどのような順序か調べてください
 
 どの値よりも小さい値という扱いになっている。
 
-CREATE TABLE
-	test_datas
-	(
-		number INT
-	)
-;
 
-INSERT INTO
-	test_datas
-VALUES
-	(
-		1
-	),
-	(
-		3
-	),
-	(
-		10
-	),
-	(
-		8
-	),
-	(
-		NULL
-	),
-	(
-		-1
-	),
-	(
-		0
-	),
-	(
-		-10
-	)
-;
-
+/*test_datasテーブルの数字データを降順で確認*/
 SELECT
-	*
+	number
 FROM
 	test_datas
 ORDER BY
 	number DESC
 ;
 
+出力結果：
 +--------+
 | number |
 +--------+
@@ -64,3 +31,72 @@ ORDER BY
 |    -10 |
 |   NULL |
 +--------+
+
+/*test_datasテーブルの数字データを昇順で確認*/
+SELECT
+	number
+FROM
+	test_datas
+ORDER BY
+	number ASC
+;
+
+出力結果：
++--------+
+| number |
++--------+
+|   NULL |
+|    -10 |
+|     -1 |
+|      0 |
+|      1 |
+|      3 |
+|      8 |
+|     10 |
++--------+
+
+/*test_datasテーブルの文字データを降順で確認*/
+SELECT
+	name
+FROM
+	test_datas
+ORDER BY
+	name DESC
+;
+
+出力結果：
++------+
+| name |
++------+
+| わん |
+| あい |
+| 。： |
+| xyz  |
+| 987  |
+| 123  |
+| -100 |
+| NULL |
++------+
+
+/*test_datasテーブルの文字データを昇順で確認*/
+SELECT
+	name
+FROM
+	test_datas
+ORDER BY
+	name ASC
+;
+
+出力結果：
++------+
+| name |
++------+
+| NULL |
+| -100 |
+| 123  |
+| 987  |
+| xyz  |
+| 。： |
+| あい |
+| わん |
++------+
