@@ -1,11 +1,12 @@
 ・折り返しなしの場合
+
 /*3人連続で座れる席の組み合わせを取得する(席列の折り返しなし)*/
 SELECT
 	S1.seat AS start_seat, '～', S2.seat AS end_seat
 FROM
-	Seats AS S1,
-	Seats AS S2,
-	Seats AS S3
+	seats AS S1,
+	seats AS S2,
+	seats AS S3
 WHERE
 	/*先頭の席番号から2席分(連続する3席)*/
 	S2.seat = S1.seat + 2
@@ -40,11 +41,11 @@ HAVING
 SELECT
 	S1.seat AS start_seat, '～', S2.seat AS end_seat
 FROM
-	Seats2 AS S1,
-	Seats2 AS S2,
-	Seats2 AS S3
+	truned_seats AS S1,
+	truned_seats AS S2,
+	truned_seats AS S3
 WHERE
-	/*先頭の席番号から2席分(連続する3席)*/
+	/*先頭の席番号から2席分(連続する3席の番号)*/
 	S2.seat = S1.seat + 2
 AND
 	S3.seat BETWEEN S1.seat AND S2.seat
@@ -71,78 +72,3 @@ HAVING
 |          8 | ～ |       10 |
 |         11 | ～ |       13 |
 +------------+----+----------+
-
-
-以下にテーブルに関するクエリを記載します。
-
-・Seatsテーブルの削除
-DROP TABLE
-	Seat
-;
-
-・Seatsテーブルの作成
-CREATE TABLE
-	Seats
-	(
-		seat INT PRIMARY KEY,
-		status CHAR(2)
-	)
-;
-
-・Seatsテーブルへのデータの挿入
-INSERT INTO
-	Seats
-VALUES
-	(1, '占'),
-	(2, '占'),
-	(3, '空'),
-	(4, '空'),
-	(5, '空'),
-	(6, '占'),
-	(7, '空'),
-	(8, '空'),
-	(9, '空'),
-	(10, '空'),
-	(11, '空'),
-	(12, '占'),
-	(13, '占'),
-	(14, '空'),
-	(15, '空')
-;
-
-
-・Seats2テーブルの削除
-DROP TABLE
-	Seat2
-;
-
-・Seats2テーブルの作成
-CREATE TABLE
-	Seats2
-	(
-		seat INT PRIMARY KEY,
-		line_id CHAR(1),
-		status CHAR(2)
-	)
-;
-
-・Seats2テーブルへのデータの挿入
-INSERT INTO
-	Seats2
-VALUES
-	(1, 'A', '占'),
-	(2, 'A', '占'),
-	(3, 'A', '空'),
-	(4, 'A', '空'),
-	(5, 'A', '空'),
-	(6, 'B', '占'),
-	(7, 'B', '占'),
-	(8, 'B', '空'),
-	(9, 'B', '空'),
-	(10, 'B', '空'),
-	(11, 'C', '空'),
-	(12, 'C', '空'),
-	(13, 'C', '空'),
-	(14, 'C', '占'),
-	(15, 'C', '空')
-;
