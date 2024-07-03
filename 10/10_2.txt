@@ -16,7 +16,7 @@ HAVING
 	3 = 
 	ALL(
 			SELECT
-				COUNT(status)
+				COUNT(S3.status)
 			FROM
 				seats AS S3
 			WHERE
@@ -57,7 +57,7 @@ HAVING
 	3 = 
 	ALL(
 			SELECT
-				COUNT(status)
+				COUNT(S3.status)
 			FROM
 				truned_seats AS S3
 			WHERE
