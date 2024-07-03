@@ -2,27 +2,30 @@
 
 /*3人連続で座れる席の組み合わせを取得する(席列の折り返しなし)*/
 SELECT
-	S1.seat AS start_seat, '～', S2.seat AS end_seat
+	S1.seat AS start_seat,
+	'～',
+	S2.seat AS end_seat
 FROM
 	seats AS S1,
-	seats AS S2,
-	seats AS S3
+	seats AS S2
 WHERE
 	/*先頭の席番号から2席分(連続する3席)*/
 	S2.seat = S1.seat + 2
-AND
-	S3.seat BETWEEN S1.seat AND S2.seat
-AND
-	S3.status = '空'
-AND
-	S1.status = '空'
-AND
-	S2.status = '空'
-GROUP BY
-	S1.seat
 HAVING
-	/*連続する3席*/
-	COUNT(*) = 3
+	/*条件に当てはまる席が3席連続している場合*/
+	3 = 
+	ALL(
+			SELECT
+				COUNT(status)
+			FROM
+				seats AS S3
+			WHERE
+				S3.seat BETWEEN S1.seat AND S2.seat
+			AND
+				S3.status = '空'
+			GROUP BY
+				S1.seat
+		)
 ;
 
 出力結果：
@@ -37,31 +40,35 @@ HAVING
 
 
 ・折り返しありの場合
-/*3人連続で座れる席の組み合わせを取得する(席列の折り返しあり)*/
+
+/*3人連続で座れる席の組み合わせを取得する(席列の折り返しなし)*/
 SELECT
-	S1.seat AS start_seat, '～', S2.seat AS end_seat
+	S1.seat AS start_seat,
+	'～',
+	S2.seat AS end_seat
 FROM
 	truned_seats AS S1,
-	truned_seats AS S2,
-	truned_seats AS S3
+	truned_seats AS S2
 WHERE
-	/*先頭の席番号から2席分(連続する3席の番号)*/
+	/*先頭の席番号から2席分(連続する3席)*/
 	S2.seat = S1.seat + 2
-AND
-	S3.seat BETWEEN S1.seat AND S2.seat
-AND
-	S3.status = '空'
-AND
-	S1.status = '空'
-AND
-	S2.status = '空'
-AND
-	S3.line_id = S1.line_id
-GROUP BY
-	S1.seat
 HAVING
-	/*連続する3席*/
-	COUNT(*) = 3
+	/*条件に当てはまる席が3席連続している場合*/
+	3 = 
+	ALL(
+			SELECT
+				COUNT(status)
+			FROM
+				truned_seats AS S3
+			WHERE
+				S3.seat BETWEEN S1.seat AND S2.seat
+			AND
+				S3.status = '空'
+			AND
+				S3.line_id = S1.line_id
+			GROUP BY
+				S1.seat
+		)
 ;
 
 出力結果：

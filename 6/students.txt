@@ -15,7 +15,7 @@ CREATE TABLE
 ;
 
 /*studentsテーブルにデータを挿入*/
-INSERT INTO
+INSERT IGNORE INTO
 	students
 VALUES
 	(

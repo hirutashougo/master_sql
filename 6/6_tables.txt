@@ -1,3 +1,5 @@
+6-1の使用テーブルの作成
+
 
 /*sequencesテーブルが存在する場合、削除する*/
 DROP TABLE IF EXISTS
@@ -8,7 +10,7 @@ DROP TABLE IF EXISTS
 CREATE TABLE
 	sequences
 	(
-		seq INT PRIMARY KEY,
+		sequence INT PRIMARY KEY,
 		name CHAR(5)
 	)
 ;
@@ -61,7 +63,7 @@ DROP TABLE IF EXISTS
 CREATE TABLE
 	sequences
 	(
-		seq INT PRIMARY KEY,
+		sequence INT PRIMARY KEY,
 		name CHAR(5)
 	)
 ;
@@ -100,3 +102,62 @@ VALUES
 |   5 | マリー   |
 |   6 | ベン     |
 +-----+----------+
+
+
+
+
+6-2の使用テーブルの作成
+
+/*studentsテーブルが存在する場合、削除する*/
+DROP TABLE IF EXISTS
+	students
+;
+
+/*studentsテーブルを作成*/
+CREATE TABLE
+	students
+	(
+		student_id INT(3) PRIMARY KEY,
+		department CHAR(12),
+		submit_date DATE
+		
+	)
+;
+
+/*studentsテーブルにデータを挿入*/
+INSERT IGNORE INTO
+	students
+VALUES
+	(
+		100,'理学部', '2018-10-10'
+	),
+	(
+		101,'理学部', '2018-9-22'
+	),
+	(
+		102,'文学部', NULL
+	),
+	(
+		103,'文学部', '2018-9-10'
+	),
+	(
+		200,'文学部', '2018-9-22'
+	),
+	(
+		201,'工学部', NULL
+	),
+	(
+		202,'経済学部', '2018-9-25'
+	)
+;
++------------+--------------+-------------+
+| student_id | department   | submit_date |
++------------+--------------+-------------+
+|        100 | 理学部       | 2018-10-10  |
+|        101 | 理学部       | 2018-09-22  |
+|        102 | 文学部       | NULL        |
+|        103 | 文学部       | 2018-09-10  |
+|        200 | 文学部       | 2018-09-22  |
+|        201 | 工学部       | NULL        |
+|        202 | 経済学部     | 2018-09-25  |
++------------+--------------+-------------+

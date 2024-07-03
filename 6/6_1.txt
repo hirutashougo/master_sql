@@ -8,9 +8,9 @@ sequencesテーブルにて、seqの番号が歯抜けになっているか判�
 /*sequencesテーブルの主キーが歯抜けかどうか判定する*/
 SELECT
 	CASE
-		WHEN COUNT(*) <> MAX(seq) THEN '歯抜けあり'
+		WHEN COUNT(*) <> MAX(sequence) THEN '歯抜けあり'
 		ELSE '歯抜けなし'
-	END AS 'jutge'
+	END AS judge
 FROM
 	sequences
 ;

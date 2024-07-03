@@ -6,7 +6,7 @@
 回答
 /*1～100を格納したNumbersテーブルから、素数を選び出す*/
 SELECT
-	*
+	number AS prime_number
 FROM
 	numbers AS N1
 WHERE
@@ -25,7 +25,7 @@ AND
 			AND
 				N1.number > N2.number
 			AND
-				/*その数字よりも小さい数字で割り切れる*/
+				/*その数字よりも小さい数字で割った余りが0*/
 				MOD(N1.number, N2.number) = 0	
 		)
 ;
