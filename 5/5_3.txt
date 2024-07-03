@@ -4,11 +4,13 @@
 
 
 回答
+/*1～100を格納したNumbersテーブルから、素数を選び出す*/
 SELECT
 	*
 FROM
 	numbers AS N1
 WHERE
+	/*1でない数字*/
 	N1.number <> 1
 AND
 	NOT EXISTS
@@ -18,10 +20,12 @@ AND
 			FROM
 				numbers AS N2
 			WHERE
+				/*1でない数字*/
 				N2.number <> 1
 			AND
 				N1.number > N2.number
 			AND
+				/*その数字よりも小さい数字で割り切れる*/
 				MOD(N1.number, N2.number) = 0	
 		)
 ;

@@ -34,7 +34,7 @@ ORDER BY
 	COUNT(child) DESC
 ;
 
-
+出力結果：
 +----------+-----------+
 | employee | child_cnt |
 +----------+-----------+

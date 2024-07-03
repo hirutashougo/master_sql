@@ -1,7 +1,9 @@
+/*personnelテーブルが既にあれば、削除する*/
 DROP TABLE
 	personnel
 ;
 
+/*personnelテーブルを作成*/
 CREATE TABLE
 	personnel
 	(
@@ -12,13 +14,22 @@ CREATE TABLE
 	)
 ;
 
+/*personnelテーブルにデータを挿入*/
 INSERT INTO
 	personnel
 VALUES
-	('赤井', '一郎', '二郎', '三郎'),
-	('工藤', '春子', '夏子', NULL),
-	('鈴木', '夏子', NULL, NULL),
-	('吉田', NULL, NULL, NULL)
+	(
+		'赤井', '一郎', '二郎', '三郎'
+	),
+	(
+		'工藤', '春子', '夏子', NULL
+	),
+	(
+		'鈴木', '夏子', NULL, NULL
+	),
+	(
+		'吉田', NULL, NULL, NULL
+	)
 ;
 
 +----------+---------+---------+---------+

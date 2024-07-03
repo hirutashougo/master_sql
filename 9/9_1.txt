@@ -10,14 +10,14 @@ SELECT
 	END AS judgement
 FROM
 	(
-		SELECT
-			*
-		FROM
-			tbl_A
+			SELECT
+				*
+			FROM
+				first_datas
 		UNION
-		SELECT
-			*
-		FROM
-			tbl_B
+			SELECT
+				*
+			FROM
+				second_datas
 	) AS TMP
 ;

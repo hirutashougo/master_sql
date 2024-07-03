@@ -1,5 +1,11 @@
+/*first_datasが既にあれば削除*/
+DROP TABLE IF EXISTS
+	first_datas
+;
+
+/*first_datasテーブルを作成*/
 CREATE TABLE
-	tbl_A
+	first_datas
 	(
 		key_id CHAR(1) PRIMARY KEY,
 		col_1 INT,
@@ -8,12 +14,19 @@ CREATE TABLE
 	)
 ;
 
+/*first_datasテーブルにデータを挿入*/
 INSERT INTO
-	tbl_A
+	first_datas
 VALUES
-	('A', 2, 3, 4),
-	('B', 0, 7, 9),
-	('C', 5, 1, 6)
+	(
+		'A', 2, 3, 4
+	),
+	(
+		'B', 0, 7, 9
+	),
+	(
+		'C', 5, 1, 6
+	)
 ;
 
 +--------+-------+-------+-------+
@@ -24,8 +37,14 @@ VALUES
 | C      |     5 |     1 |     6 |
 +--------+-------+-------+-------+
 
+/*second_datasが既にあれば削除*/
+DROP TABLE IF EXISTS
+	second_datas
+;
+
+/*second_datasテーブルを作成*/
 CREATE TABLE
-	tbl_B
+	second_datas
 	(
 		key_id CHAR(1) PRIMARY KEY,
 		col_1 INT,
@@ -34,12 +53,19 @@ CREATE TABLE
 	)
 ;
 
+/*second_datasテーブルにデータを挿入*/
 INSERT INTO
-	tbl_B
+	second_datas
 VALUES
-	('A', 2, 3, 4),
-	('B', 0, 7, 9),
-	('C', 5, 1, 6)
+	(
+		'A', 2, 3, 4
+	),
+	(
+		'B', 0, 7, 9
+	),
+	(
+		'C', 5, 1, 6
+	)
 ;
 
 +--------+-------+-------+-------+
@@ -50,6 +76,16 @@ VALUES
 | C      |     5 |     1 |     6 |
 +--------+-------+-------+-------+
 
+
+
+以下、確認用のための、値を一部ずらしたテーブル
+
+/*second_datasが既にあれば削除*/
+DROP TABLE IF EXISTS
+	second_datas
+;
+
+/*second_datasテーブルを作成*/
 CREATE TABLE
 	tbl_B
 	(
@@ -60,10 +96,25 @@ CREATE TABLE
 	)
 ;
 
+/*second_datasテーブルにデータを挿入*/
 INSERT INTO
 	tbl_B
 VALUES
-	('A', 2, 3, 4),
-	('B', 0, 7, 8),
-	('C', 5, 1, 6)
+	(
+		'A', 2, 3, 4
+	),
+	(
+		'B', 0, 7, 8
+	),
+	(
+		'C', 5, 1, 6
+	)
 ;
+
++--------+-------+-------+-------+
+| key_id | col_1 | col_2 | col_3 |
++--------+-------+-------+-------+
+| A      |     2 |     3 |     4 |
+| B      |     0 |     7 |     8 |
+| C      |     5 |     1 |     6 |
++--------+-------+-------+-------+
