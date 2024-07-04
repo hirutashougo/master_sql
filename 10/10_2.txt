@@ -11,6 +11,8 @@ FROM
 WHERE
 	/*先頭の席番号から2席分(連続する3席)*/
 	S2.seat = S1.seat + 2
+GROUP BY
+	S1.seat
 HAVING
 	/*条件に当てはまる席が3席連続している場合*/
 	3 = 
@@ -52,6 +54,8 @@ FROM
 WHERE
 	/*先頭の席番号から2席分(連続する3席)*/
 	S2.seat = S1.seat + 2
+GROUP BY
+	S1.seat
 HAVING
 	/*条件に当てはまる席が3席連続している場合*/
 	3 = 
