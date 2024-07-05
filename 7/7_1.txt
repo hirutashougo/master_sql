@@ -1,5 +1,4 @@
-/*accountsテーブルの「処理金額」列の
-前3行分の平均を算出*/
+/*accountsテーブルの「処理金額」列の前3行以内の平均を算出*/
 SELECT
 	prc_date,
 	prc_amt,

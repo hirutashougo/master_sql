@@ -1,4 +1,5 @@
 ・相関サブクエリ
+/*accountsテーブルの「処理金額」列の前3行の平均を算出*/
 SELECT
 	prc_date,
 	prc_amt,
@@ -27,13 +28,30 @@ FROM
 ;
 
 ・ウィンドウ関数
+/*accountsテーブルの「処理金額」列の前3行の平均を算出*/
 SELECT
 	prc_date,
 	prc_amt,
-	CASE WHEN COUNT(prc_date) OVER(ORDER BY prc_date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) < 3 THEN NULL
-	ELSE
-		AVG(prc_amt)
-		OVER(ORDER BY prc_date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)
+	CASE
+		WHEN
+			COUNT(prc_date)
+			OVER(
+					ORDER BY
+						prc_date
+					ROWS
+						/*2行前を対象に含める*/
+						BETWEEN 2 PRECEDING AND CURRENT ROW
+					/*前が3行あるものが対象*/
+				) < 3 THEN NULL
+		ELSE
+			AVG(prc_amt)
+			OVER(
+					ORDER BY
+						prc_date
+					ROWS
+						/*2行前を対象に含める*/
+						BETWEEN 2 PRECEDING AND CURRENT ROW
+				)
 	END AS prc_average
 FROM
 	accounts
@@ -50,3 +68,8 @@ FROM
 | 2018-11-06 |    7200 |  12066.6667 |
 | 2018-11-11 |   11000 |   4400.0000 |
 +------------+---------+-------------+
+
+
+
+*修正ポイント
+コード規約違反、コメント
