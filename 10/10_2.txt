@@ -18,7 +18,7 @@ GROUP BY
 	S1.seat,
 	S2.seat
 HAVING
-	COUNT(*) =
+	COUNT(S3.seat) =
 	SUM(
 			CASE
 				/*シートの状態が空なら1とする*/
@@ -62,7 +62,7 @@ GROUP BY
 	S1.seat,
 	S2.seat
 HAVING
-	COUNT(*) =
+	COUNT(S3.seat) =
 	SUM(
 			CASE
 				/*シートの状態が空なら1とする*/
