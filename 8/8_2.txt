@@ -4,42 +4,34 @@ personnelテーブルから、社員一人当たりの子供の数を取得せ�
 
 
 回答
-/*社員一人当たりのお供の数を取得する*/
+/*社員一人当たりの子供の数を取得する*/
 SELECT
-	employee,
-	COUNT(child) AS child_cnt
+	EMP.employee,
+	children.child,
+	COUNT(child) OVER (PARTITION BY employee) AS chil_count
 FROM
+	personnel EMP
+LEFT OUTER JOIN
+	children
+ON
+	children.child
+IN
 	(
-		SELECT
-			employee,
-			child_1 AS child
-		FROM
-			personnel
-	UNION ALL
-		SELECT
-			employee,
-			child_2 AS child
-		FROM
-			personnel
-	UNION ALL
-		SELECT
-			employee,
-			child_3 AS child
-		FROM
-			personnel
-	) AS pl
-GROUP BY
-	employee
-ORDER BY
-	COUNT(child) DESC
+		EMP.child_1,
+		EMP.child_2,
+		EMP.child_3
+	)
 ;
 
 出力結果：
-+----------+-----------+
-| employee | child_cnt |
-+----------+-----------+
-| 赤井     |         3 |
-| 工藤     |         2 |
-| 鈴木     |         1 |
-| 吉田     |         0 |
-+----------+-----------+
++----------+-------+------------+
+| employee | child | chil_count |
++----------+-------+------------+
+| 吉田     | NULL  |          0 |
+| 工藤     | 春子  |          2 |
+| 工藤     | 夏子  |          2 |
+| 赤井     | 二郎  |          3 |
+| 赤井     | 一郎  |          3 |
+| 赤井     | 三郎  |          3 |
+| 鈴木     | 夏子  |          1 |
++----------+-------+------------+

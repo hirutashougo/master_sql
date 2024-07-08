@@ -7,10 +7,10 @@ DROP TABLE IF EXISTS
 CREATE TABLE
 	accounts
 	(
-	prc_date DATE PRIMARY KEY,
-	prc_first INT,
-	prc_second INT,
-	prc_third INT
+		prc_date DATE PRIMARY KEY,
+		prc_first INT,
+		prc_second INT,
+		prc_third INT
 	)
 ;
 

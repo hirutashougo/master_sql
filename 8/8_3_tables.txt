@@ -1,17 +1,20 @@
-DROP TABLE
-	A_class_students
+/*first_class_studentsテーブルが既にあれば削除*/
+DROP TABLE IF EXISTS
+	first_class_students
 ;
 
+/*first_class_studentsを生成*/
 CREATE TABLE
-	A_class_students
+	first_class_students
 	(
 		id INT PRIMARY KEY,
 		name CHAR(10)
 	)
 ;
 
+/*first_class_studentsテーブルに値を挿入*/
 INSERT INTO
-	A_class_students
+	first_class_students
 VALUES
 	(1, '田中'),
 	(2, '鈴木'),
@@ -26,20 +29,23 @@ VALUES
 |  3 | 伊集院 |
 +----+--------+
 
-DROP TABLE
-	B_class_students
+/*second_class_studentsテーブルが既にあれば削除*/
+DROP TABLE IF EXISTS
+	second_class_students
 ;
 
+/*second_class_studentsテーブルを生成*/
 CREATE TABLE
-	B_class_students
+	second_class_students
 	(
 		id INT PRIMARY KEY,
 		name CHAR(10)
 	)
 ;
 
+/*second_class_studentsテーブルに値を挿入*/
 INSERT INTO
-	B_class_students
+	second_class_students
 VALUES
 	(1, '田中'),
 	(2, '内海'),

@@ -1,86 +1,125 @@
+/*sequenseValuesテーブルがある場合、削除*/
+DROP TABLE IF EXISTS
+	sequenceValues
+;
+
+/*sequencesテーブルを生成*/
 CREATE TABLE
-	SeqTbl
+	sequenceValues
 	(
-		seq INT PRIMARY KEY
+		sequence INT PRIMARY KEY
 	)
 ;
 
+/*sequencesテーブルに値を挿入*/
 INSERT INTO
-	SeqTbl
+	sequenceValues
 VALUES
-	(0),(1),(2),(4),(5),(6),(7),(8),(11),(12)
+	(0),
+	(1),
+	(2),
+	(4),
+	(5),
+	(6),
+	(7),
+	(8),
+	(11),
+	(12)
 ;
 
 
-+-----+
-| seq |
-+-----+
-|   1 |
-|   2 |
-|   4 |
-|   5 |
-|   6 |
-|   7 |
-|   8 |
-|  11 |
-|  12 |
-+-----+
++----------+
+| sequence |
++----------+
+|        0 |
+|        1 |
+|        2 |
+|        4 |
+|        5 |
+|        6 |
+|        7 |
+|        8 |
+|       11 |
+|       12 |
++----------+
 
+	/*digitsテーブルがあれば、削除*/
+	DROP TABLE IF EXISTS
+		digits
+	;
 
+	/*digitsテーブルを生成*/
+	CREATE TABLE
+		digits
+		(
+			digit INT PRIMARY KEY
+		)
+	;
 
-CREATE TABLE
-	Digits
-	(
-		digits INT PRIMARY KEY
-	)
+	/*digitsテーブルに値を挿入*/
+	INSERT INTO
+		digits
+	VALUES
+		(0),
+		(1),
+		(2),
+		(3),
+		(4),
+		(5),
+		(6),
+		(7),
+		(8),
+		(9)
+	;
+
++-------+
+| digit |
++-------+
+|     0 |
+|     1 |
+|     2 |
+|     3 |
+|     4 |
+|     5 |
+|     6 |
+|     7 |
+|     8 |
+|     9 |
++-------+
+
+/*sequencesビューがあれば削除*/
+DROP VIEW IF EXISTS
+	sequences
 ;
 
-INSERT INTO
-	Digits
-VALUES
-	(0),(1),(2),(3),(4),(5),(6),(7),(8),(9)
-;
-
-
+/*sequencesビューを作成*/
 CREATE VIEW
-	Sequence
+	sequences
 	(
-		seq
+		sequence
 	) AS
 SELECT
-	D1.digits + (D2.digits * 10) + (D3.digits * 100)
+	/*0～9の連番を1,10,100の位に振り分けて足し、整数を作る*/
+	D1.digit + (D2.digit * 10) + (D3.digit * 100)
 FROM
-	Digits AS D1
+	digits AS D1
 CROSS JOIN
-	Digits AS D2
+	digits AS D2
 CROSS JOIN
-	Digits AS D3
+	digits AS D3
 ;
 
-+--------+
-| digits |
-+--------+
-|      1 |
-|      2 |
-|      3 |
-|      4 |
-|      5 |
-|      6 |
-|      7 |
-|      8 |
-|      9 |
-+--------+
-
-
-
+/*確認のため、1～100までを生成*/
 SELECT
 	*
 FROM
-	Sequence
+	sequences
 WHERE
-	seq >= 1
+	/*1以上の整数*/
+	sequence >= 1
 AND
-	seq <= 100
+	/*100以下の整数*/
+	sequence <= 100
 ORDER BY
-	seq
+	sequence
 ;

@@ -1,5 +1,5 @@
 /*table_agesテーブルが既に存在する場合、削除する*/
-DROP TABLE
+DROP TABLE IF EXISTS
 	table_ages
 ;
 
@@ -44,7 +44,7 @@ DROP TABLE IF EXISTS
 CREATE TABLE
 	table_sexes
 	(
-		sex_cd CHAR(1) PRIMARY KEY,
+		sex_code CHAR(1) PRIMARY KEY,
 		sex CHAR(1)
 	)
 ;
@@ -61,12 +61,12 @@ VALUES
 	)
 ;
 
-+--------+------+
-| sex_cd | sex  |
-+--------+------+
-| f      | 女   |
-| m      | 男   |
-+--------+------+
++----------+------+
+| sex_code | sex  |
++----------+------+
+| f        | 女   |
+| m        | 男   |
++----------+------+
 
 /*populationsテーブルが既に存在する場合、削除する*/
 DROP TABLE IF EXISTS
@@ -77,11 +77,11 @@ DROP TABLE IF EXISTS
 CREATE TABLE
 	populations
 	(
-		pref_name CHAR(2),
+		prefecture_name CHAR(2),
 		age_class INT,
-		sex_cd CHAR(1),
+		sex_code CHAR(1),
 		population INT,
-		PRIMARY KEY(pref_name, age_class, sex_cd)
+		PRIMARY KEY(prefecture_name, age_class, sex_code)
 	)
 ;
 
@@ -130,20 +130,20 @@ VALUES
 	)
 ;
 
-+-----------+-----------+--------+------------+
-| pref_name | age_class | sex_cd | population |
-+-----------+-----------+--------+------------+
-| 千葉      |         1 | f      |       1000 |
-| 千葉      |         1 | m      |        900 |
-| 千葉      |         3 | f      |        900 |
-| 東京      |         1 | f      |       1500 |
-| 東京      |         1 | m      |        900 |
-| 東京      |         3 | f      |       1200 |
-| 秋田      |         1 | f      |        800 |
-| 秋田      |         1 | m      |        400 |
-| 秋田      |         3 | f      |       1000 |
-| 秋田      |         3 | m      |       1000 |
-| 青森      |         1 | f      |        500 |
-| 青森      |         1 | m      |        700 |
-| 青森      |         3 | f      |        800 |
-+-----------+-----------+--------+------------+
++-----------------+-----------+----------+------------+
+| prefecture_name | age_class | sex_code | population |
++-----------------+-----------+----------+------------+
+| 千葉            |         1 | f        |       1000 |
+| 千葉            |         1 | m        |        900 |
+| 千葉            |         3 | f        |        900 |
+| 東京            |         1 | f        |       1500 |
+| 東京            |         1 | m        |        900 |
+| 東京            |         3 | f        |       1200 |
+| 秋田            |         1 | f        |        800 |
+| 秋田            |         1 | m        |        400 |
+| 秋田            |         3 | f        |       1000 |
+| 秋田            |         3 | m        |       1000 |
+| 青森            |         1 | f        |        500 |
+| 青森            |         1 | m        |        700 |
+| 青森            |         3 | f        |        800 |
++-----------------+-----------+----------+------------+

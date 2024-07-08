@@ -1,3 +1,118 @@
+/*社員一人当たりのお供の数を取得する*/
+SELECT
+	employee,
+	COUNT(child) AS child_cnt
+FROM
+	(
+		SELECT
+			employee,
+			child_1 AS child
+		FROM
+			personnels
+	UNION ALL
+		SELECT
+			employee,
+			child_2 AS child
+		FROM
+			personnels
+	UNION ALL
+		SELECT
+			employee,
+			child_3 AS child
+		FROM
+			personnels
+	) AS pl
+GROUP BY
+	employee
+ORDER BY
+	COUNT(child) DESC
+;
+
+出力結果：
++----------+-----------+
+| employee | child_cnt |
++----------+-----------+
+| 赤井     |         3 |
+| 工藤     |         2 |
+| 鈴木     |         1 |
+| 吉田     |         0 |
++----------+-----------+
+
+/*personnelテーブルが既にあれば、削除する*/
+DROP TABLE
+	personnels
+;
+
+/*personnelテーブルを作成*/
+CREATE TABLE
+	personnels
+	(
+		employee CHAR(10) PRIMARY KEY,
+		child_1 CHAR(10),
+		child_2 CHAR(10),
+		child_3 CHAR(10)
+	)
+;
+
+/*personnelテーブルにデータを挿入*/
+INSERT INTO
+	personnels
+VALUES
+	(
+		'赤井', '一郎', '二郎', '三郎'
+	),
+	(
+		'工藤', '春子', '夏子', NULL
+	),
+	(
+		'鈴木', '夏子', NULL, NULL
+	),
+	(
+		'吉田', NULL, NULL, NULL
+	)
+;
+
++----------+---------+---------+---------+
+| employee | child_1 | child_2 | child_3 |
++----------+---------+---------+---------+
+| 吉田     | NULL    | NULL    | NULL    |
+| 工藤     | 春子    | 夏子    | NULL    |
+| 赤井     | 一郎    | 二郎    | 三郎    |
+| 鈴木     | 夏子    | NULL    | NULL    |
++----------+---------+---------+---------+
+
+
+SELECT
+	EMP.employee,
+	children.child
+FROM
+	personnel EMP
+LEFT OUTER JOIN
+	children
+ON
+	children.child
+IN
+	(
+		EMP.child_1,
+		EMP.child_2,
+		EMP.child_3
+	)
+;
+
++----------+-------+
+| employee | child |
++----------+-------+
+| 工藤     | 春子  |
+| 赤井     | 一郎  |
+| 工藤     | 夏子  |
+| 鈴木     | 夏子  |
+| 赤井     | 二郎  |
+| 赤井     | 三郎  |
+| 吉田     | NULL  |
++----------+-------+
+
+
+
 	SELECT
 		employee,
 		child_1 AS child

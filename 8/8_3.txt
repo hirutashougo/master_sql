@@ -1,6 +1,6 @@
 問題
 
-class_Aテーブルに対し、class_Bテーブルから重複しない形で情報を挿入せよ
+class_Aのテーブルに対し、class_Bのテーブルから重複しない形で情報を挿入せよ
 
 
 回答
@@ -8,10 +8,9 @@ class_Aテーブルに対し、class_Bテーブルから重複しない形で情
 MariaDBにおいては、MERGEが使用できないため、
 INSERT INTOを用いて同様の処理を再現する。
 
-/*class_Anのテーブルに対し、
-	class_Bのテーブルから重複しない形で情報を挿入する*/
+/*first_class_studentsテーブルに対し、second_class_studentsのテーブルから重複しない形で情報を挿入する*/
 INSERT INTO
-	A_class_students AS A
+	first_class_students
 	(
 		id,
 		name
@@ -20,7 +19,7 @@ SELECT
 	id,
 	name
 FROM
-	B_class_students AS B
+	second_class_students AS B
 ON DUPLICATE KEY UPDATE 
 	id = B.id,
 	name = B.name

@@ -87,7 +87,7 @@ DROP TABLE IF EXISTS
 
 /*second_datasテーブルを作成*/
 CREATE TABLE
-	tbl_B
+	second_datas
 	(
 		key_id CHAR(1) PRIMARY KEY,
 		col_1 INT,
@@ -98,7 +98,7 @@ CREATE TABLE
 
 /*second_datasテーブルにデータを挿入*/
 INSERT INTO
-	tbl_B
+	second_datas
 VALUES
 	(
 		'A', 2, 3, 4
@@ -118,3 +118,37 @@ VALUES
 | B      |     0 |     7 |     8 |
 | C      |     5 |     1 |     6 |
 +--------+-------+-------+-------+
+
+/*second_datasが既にあれば削除*/
+DROP TABLE IF EXISTS
+	second_datas
+;
+
+/*second_datasテーブルを作成*/
+CREATE TABLE
+	second_datas
+	(
+		key_id CHAR(1) PRIMARY KEY,
+		col_1 INT,
+		col_2 INT,
+		col_3 INT
+	)
+;
+
+/*second_datasテーブルにデータを挿入*/
+INSERT INTO
+	second_datas
+VALUES
+	(
+		'A', 2, 3, 4
+	),
+	(
+		'B', 0, 7, 8
+	),
+	(
+		'C', 5, 1, 6
+	),
+	(
+		'D', 6, 3, 7
+	)
+;

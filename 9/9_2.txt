@@ -1,20 +1,28 @@
-/*Skillテーブルにあるskillを全て持つ人物(emp)を取得*/
+/*skillsテーブルにあるskillを過不足なく持つ人物(employee)を取得*/
 SELECT
-	ES.emp
+	ES.employee
 FROM
-	Skills AS S
-INNER JOIN
-	EmpSkills AS ES
+	employeeSkills AS ES
+LEFT OUTER JOIN
+	skills AS S
 ON
 	S.skill = ES.skill
 GROUP BY
-	ES.emp
+	ES.employee
 HAVING
+	COUNT(ES.skill) =
+	(
+		SELECT
+			COUNT(skill)
+		FROM
+			skills
+	)
+AND
 	COUNT(S.skill) =
 	(
 		SELECT
 			COUNT(skill)
 		FROM
-			Skills
+			skills
 	)
 ;

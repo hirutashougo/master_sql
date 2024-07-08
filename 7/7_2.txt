@@ -34,24 +34,20 @@ SELECT
 	prc_amt,
 	CASE
 		WHEN
-			COUNT(prc_date)
-			OVER(
-					ORDER BY
-						prc_date
-					ROWS
-						/*2行前を対象に含める*/
-						BETWEEN 2 PRECEDING AND CURRENT ROW
-					/*前が3行あるものが対象*/
-				) < 3 THEN NULL
+			COUNT(prc_date) OVER(
+				ORDER BY
+					prc_date
+				/*2行前を対象に含める*/
+				ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
+				/*前が3行あるものが対象*/
+			) < 3 THEN NULL
 		ELSE
-			AVG(prc_amt)
-			OVER(
-					ORDER BY
-						prc_date
-					ROWS
-						/*2行前を対象に含める*/
-						BETWEEN 2 PRECEDING AND CURRENT ROW
-				)
+			AVG(prc_amt) OVER(
+				ORDER BY
+					prc_date
+				/*2行前を対象に含める*/
+				ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
+			)
 	END AS prc_average
 FROM
 	accounts

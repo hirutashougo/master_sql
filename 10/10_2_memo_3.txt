@@ -28,21 +28,55 @@ HAVING
 ;
 
 
+
+/*3人連続で座れる席の組み合わせを取得する(席列の折り返しなし)*/
+SELECT
+	S1.seat AS start_seat,
+	'～',
+	S2.seat AS end_seat
+FROM
+	seats AS S1,
+	seats AS S2,
+	seats AS S3
+WHERE
+		/*先頭の席番号から2席分(連続する3席)*/
+		S2.seat = S1.seat + 2
+	AND
+		S3.seat BETWEEN S1.seat AND S2.seat
+GROUP BY
+	S1.seat
+HAVING
 	/*条件に当てはまる席が3席連続している場合*/
-	3 = 
-	ALL(
-			SELECT
-				COUNT(S3.status)
-			FROM
-				seats AS S3
-			WHERE
-				S3.seat BETWEEN S1.seat AND S2.seat
-			AND
-				S3.status = '空'
-			GROUP BY
-				S1.seat
-		)
+	COUNT(S3.seat) = COUNT(S3.status = '空' or Null)
 ;
+
+/*3人連続で座れる席の組み合わせを取得する(席列の折り返しなし)*/
+SELECT
+	S1.seat AS start_seat,
+	'～',
+	S2.seat AS end_seat
+FROM
+	seats AS S1,
+	seats AS S2,
+	seats AS S3
+WHERE
+		/*先頭の席番号から2席分(連続する3席)*/
+		S2.seat = S1.seat + 2
+	AND
+		S3.seat BETWEEN S1.seat AND S2.seat
+GROUP BY
+	S1.seat
+HAVING
+	/*条件に当てはまる席が3席連続している場合*/
+	3 =
+	COUNT(
+			S3.status = '空'
+		OR
+			Null
+	)
+;
+
+
 
 /*3人連続で座れる席の組み合わせを取得する(席列の折り返しなし)*/
 SELECT

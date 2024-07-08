@@ -1,12 +1,19 @@
+/*skillsテーブルが存在する場合、削除*/
+DROP TABLE IF EXISTS
+	skills
+;
+
+/*skillsテーブルを作成*/
 CREATE TABLE
-	Skills
+	skills
 	(
 		skill CHAR(10) PRIMARY KEY
 	)
 ;
 
+/*skillsテーブルに値を挿入*/
 INSERT INTO
-	Skills
+	skills
 VALUES
 	('Oracle'),
 	('UNIX'),
@@ -21,17 +28,25 @@ VALUES
 | UNIX   |
 +--------+
 
+
+/*employeeSkillsが存在する場合、削除*/
+DROP TABLE IF EXISTS
+	employeeSkills
+;
+
+/*employeeSkillsテーブルを作成*/
 CREATE TABLE
-	EmpSkills
+	employeeSkills
 	(
-		emp CHAR(10),
+		employee CHAR(10),
 		skill CHAR(10),
-		PRIMARY KEY(emp, skill)
+		PRIMARY KEY(employee, skill)
 	)
 ;
 
+/*employeeSkillsテーブルに値を挿入*/
 INSERT INTO
-	EmpSkills
+	employeeSkills
 VALUES
 	('相田', 'Oracle'),
 	('相田', 'UNIX'),
@@ -49,21 +64,21 @@ VALUES
 	('渡来', 'Oracle')
 ;
 
-+--------+--------+
-| emp    | skill  |
-+--------+--------+
-| 平井   | C++    |
-| 平井   | Oracle |
-| 平井   | Perl   |
-| 平井   | PHP    |
-| 平井   | UNIX   |
-| 渡来   | Oracle |
-| 相田   | C#     |
-| 相田   | Java   |
-| 相田   | Oracle |
-| 相田   | UNIX   |
-| 神崎   | Java   |
-| 神崎   | Oracle |
-| 神崎   | UNIX   |
-| 若田部 | Perl   |
-+--------+--------+
++----------+--------+
+| employee | skill  |
++----------+--------+
+| 平井     | C++    |
+| 平井     | Oracle |
+| 平井     | Perl   |
+| 平井     | PHP    |
+| 平井     | UNIX   |
+| 渡来     | Oracle |
+| 相田     | C#     |
+| 相田     | Java   |
+| 相田     | Oracle |
+| 相田     | UNIX   |
+| 神崎     | Java   |
+| 神崎     | Oracle |
+| 神崎     | UNIX   |
+| 若田部   | Perl   |
++----------+--------+
