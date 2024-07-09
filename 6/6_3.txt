@@ -6,26 +6,3 @@
 回答
 
 /*品物を全て揃えなかった店舗と品物の不足数を一覧表示*/
-SELECT
-	SI.shop,
-	COUNT(I.item) AS my_item_cnt,
-	(SELECT COUNT(item) FROM items) - COUNT(I.item) AS diff_cnt
-FROM
-	shop_items AS SI
-LEFT OUTER JOIN
-	items AS I
-ON
-	SI.item = I.item
-GROUP BY
-	SI.shop
-;
-
-SELECT
-	*
-FROM
-	shop_items AS SI
-LEFT OUTER JOIN
-	items AS I
-ON
-	SI.item = I.item
-;
