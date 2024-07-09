@@ -7,10 +7,10 @@ DROP TABLE IF EXISTS
 CREATE TABLE
 	first_datas
 	(
-		key_id CHAR(1) PRIMARY KEY,
-		col_1 INT,
-		col_2 INT,
-		col_3 INT
+		key_identification CHAR(1) PRIMARY KEY,
+		first_value INT,
+		secind_value INT,
+		third_value INT
 	)
 ;
 
@@ -29,13 +29,13 @@ VALUES
 	)
 ;
 
-+--------+-------+-------+-------+
-| key_id | col_1 | col_2 | col_3 |
-+--------+-------+-------+-------+
-| A      |     2 |     3 |     4 |
-| B      |     0 |     7 |     9 |
-| C      |     5 |     1 |     6 |
-+--------+-------+-------+-------+
++--------------------+-------------+--------------+-------------+
+| key_identification | first_value | secind_value | third_value |
++--------------------+-------------+--------------+-------------+
+| A                  |           2 |            3 |           4 |
+| B                  |           0 |            7 |           9 |
+| C                  |           5 |            1 |           6 |
++--------------------+-------------+--------------+-------------+
 
 /*second_datasが既にあれば削除*/
 DROP TABLE IF EXISTS
@@ -46,10 +46,10 @@ DROP TABLE IF EXISTS
 CREATE TABLE
 	second_datas
 	(
-		key_id CHAR(1) PRIMARY KEY,
-		col_1 INT,
-		col_2 INT,
-		col_3 INT
+		key_identification CHAR(1) PRIMARY KEY,
+		first_value INT,
+		secind_value INT,
+		third_value INT
 	)
 ;
 
@@ -68,13 +68,13 @@ VALUES
 	)
 ;
 
-+--------+-------+-------+-------+
-| key_id | col_1 | col_2 | col_3 |
-+--------+-------+-------+-------+
-| A      |     2 |     3 |     4 |
-| B      |     0 |     7 |     9 |
-| C      |     5 |     1 |     6 |
-+--------+-------+-------+-------+
++--------------------+-------------+--------------+-------------+
+| key_identification | first_value | secind_value | third_value |
++--------------------+-------------+--------------+-------------+
+| A                  |           2 |            3 |           4 |
+| B                  |           0 |            7 |           9 |
+| C                  |           5 |            1 |           6 |
++--------------------+-------------+--------------+-------------+
 
 
 
@@ -89,10 +89,10 @@ DROP TABLE IF EXISTS
 CREATE TABLE
 	second_datas
 	(
-		key_id CHAR(1) PRIMARY KEY,
-		col_1 INT,
-		col_2 INT,
-		col_3 INT
+		key_identification CHAR(1) PRIMARY KEY,
+		first_value INT,
+		secind_value INT,
+		third_value INT
 	)
 ;
 
@@ -111,13 +111,16 @@ VALUES
 	)
 ;
 
-+--------+-------+-------+-------+
-| key_id | col_1 | col_2 | col_3 |
-+--------+-------+-------+-------+
-| A      |     2 |     3 |     4 |
-| B      |     0 |     7 |     8 |
-| C      |     5 |     1 |     6 |
-+--------+-------+-------+-------+
++--------------------+-------------+--------------+-------------+
+| key_identification | first_value | secind_value | third_value |
++--------------------+-------------+--------------+-------------+
+| A                  |           2 |            3 |           4 |
+| B                  |           0 |            7 |           8 |
+| C                  |           5 |            1 |           6 |
++--------------------+-------------+--------------+-------------+
+
+
+以下、確認のために一行増やしたテーブルを作成
 
 /*second_datasが既にあれば削除*/
 DROP TABLE IF EXISTS
@@ -128,10 +131,10 @@ DROP TABLE IF EXISTS
 CREATE TABLE
 	second_datas
 	(
-		key_id CHAR(1) PRIMARY KEY,
-		col_1 INT,
-		col_2 INT,
-		col_3 INT
+		key_identification CHAR(1) PRIMARY KEY,
+		first_value INT,
+		secind_value INT,
+		third_value INT
 	)
 ;
 
@@ -143,7 +146,7 @@ VALUES
 		'A', 2, 3, 4
 	),
 	(
-		'B', 0, 7, 8
+		'B', 0, 7, 9
 	),
 	(
 		'C', 5, 1, 6
@@ -152,3 +155,12 @@ VALUES
 		'D', 6, 3, 7
 	)
 ;
+
++--------------------+-------------+--------------+-------------+
+| key_identification | first_value | secind_value | third_value |
++--------------------+-------------+--------------+-------------+
+| A                  |           2 |            3 |           4 |
+| B                  |           0 |            7 |           8 |
+| C                  |           5 |            1 |           6 |
+| D                  |           6 |            3 |           7 |
++--------------------+-------------+--------------+-------------+

@@ -1,3 +1,84 @@
+
+
+/*2つのテーブルの内容が同じであれば'一致'そうでなければ'不一致'と表示する*/
+SELECT
+	CASE
+		WHEN COUNT(DISTINCT key_identification) = COUNT(*) THEN '一致'
+		ELSE '不一致'
+	END AS judgement
+FROM
+	(
+		SELECT
+			*
+		FROM
+			first_datas AS FD
+		UNION
+		SELECT
+			*
+		FROM
+			second_datas AS SD
+	) AS TMP
+;
+
+
+/*2つのテーブルの内容が同じであれば'一致'そうでなければ'不一致'と表示する*/
+SELECT
+	*
+FROM
+	(
+		SELECT
+			first_value,
+			secind_value,
+			third_value
+		FROM
+			first_datas AS FD
+		UNION
+		SELECT
+			first_value,
+			secind_value,
+			third_value
+		FROM
+			second_datas AS SD
+	) AS TMP
+;
+
+
+/*2つのテーブルの内容が同じであれば'一致'そうでなければ'不一致'と表示する*/
+SELECT
+	*
+FROM
+	(
+		SELECT
+			*
+		FROM
+			first_datas AS FD
+		UNION
+		SELECT
+			*
+		FROM
+			second_datas AS SD
+	) AS TMP
+;
+
++--------------------+-------------+--------------+-------------+
+| key_identification | first_value | secind_value | third_value |
++--------------------+-------------+--------------+-------------+
+| A                  |           2 |            3 |           4 |
+| B                  |           0 |            7 |           9 |
+| C                  |           5 |            1 |           6 |
+| D                  |           6 |            3 |           7 |
++--------------------+-------------+--------------+-------------+
+
++--------------------+-------------+--------------+-------------+
+| key_identification | first_value | secind_value | third_value |
++--------------------+-------------+--------------+-------------+
+| A                  |           2 |            3 |           4 |
+| B                  |           0 |            7 |           9 |
+| C                  |           5 |            1 |           6 |
+| B                  |           0 |            7 |           8 |
++--------------------+-------------+--------------+-------------+
+
+
 SELECT
 	COUNT(*) AS row_cnt
 FROM

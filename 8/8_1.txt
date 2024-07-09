@@ -20,27 +20,27 @@ LEFT OUTER JOIN
 			age_class,
 			sex_code,
 			SUM(
-					CASE
-						WHEN prefecture_name IN ('青森', '秋田') THEN population
-						ELSE NULL
-					END
-				) AS population_tohoku,
+				CASE
+					WHEN prefecture_name IN ('青森', '秋田') THEN population
+					ELSE NULL
+				END
+			) AS population_tohoku,
 			SUM(
-					CASE
-						WHEN prefecture_name IN ('東京', '千葉') THEN population
-						ELSE NULL
-					END
-				) AS population_kanto
+				CASE
+					WHEN prefecture_name IN ('東京', '千葉') THEN population
+					ELSE NULL
+				END
+			) AS population_kanto
 		FROM
 			populations
 		GROUP BY
 			age_class,
 			sex_code
 	) AS DATA
-		ON
-			MASTER.age_class = DATA.age_class
-		AND
-			MASTER.sex_code = DATA.sex_code
+ON
+	MASTER.age_class = DATA.age_class
+AND
+	MASTER.sex_code = DATA.sex_code
 ;
 
 上記のコードを、中間ビューをなるべく減らすように修正してください
@@ -59,17 +59,17 @@ FROM
 			MASTER.age_class,
 			MASTER.sex_code,
 			SUM(
-					CASE
-						WHEN prefecture_name IN ('青森', '秋田') THEN population
-						ELSE NULL
-					END
-				) AS population_tohoku,
+				CASE
+					WHEN prefecture_name IN ('青森', '秋田') THEN population
+					ELSE NULL
+				END
+			) AS population_tohoku,
 			SUM(
-					CASE
-						WHEN prefecture_name IN ('東京', '千葉') THEN population
-						ELSE NULL
-					END
-				) AS population_kanto
+				CASE
+					WHEN prefecture_name IN ('東京', '千葉') THEN population
+					ELSE NULL
+				END
+			) AS population_kanto
 		FROM
 			(
 				SELECT
