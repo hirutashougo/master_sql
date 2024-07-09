@@ -1,6 +1,6 @@
 
 /*personnelテーブルが既にあれば、削除する*/
-DROP TABLE
+DROP TABLE IF EXISTS
 	personnels
 ;
 
@@ -42,7 +42,7 @@ VALUES
 | 鈴木     | 夏子    | NULL    | NULL    |
 +----------+---------+---------+---------+
 
-/**/
+/*cildrenビューが既に存在する場合、削除*/
 DROP VIEW IF EXISTS
 	children
 ;

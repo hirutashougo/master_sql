@@ -1,29 +1,29 @@
-問題
-
-全員が9月中に提出済みの学部を選択せよ
-
-
-回答
-
-/*studentsテーブルで、全員が9月中に提出済みの学部を選択する*/
+/*店舗の現在在庫数と、足りなかった商品を表示*/
 SELECT
-	department
+	SI.shop,
+	COUNT(SI.item) AS my_item_count,
+	(
+		SELECT
+			COUNT(item)
+		FROM
+			items
+	) - COUNT(I.item) AS diferent_count
 FROM
-	students
+	shop_items AS SI
+INNER JOIN
+	items AS I
+ON
+	SI.item = I.item
 GROUP BY
-	department
-HAVING
-	COUNT(*) =
-	SUM(
-			CASE
-				WHEN
-					submit_date <= '2018-9-1'
-				AND
-					submit_date >= '2018-9-30'
-				/*2018年9月中に提出済みの生徒を1とする*/
-				THEN 1
-				/*2018年9月中に提出済みでないの生徒を0とする*/
-				ELSE 0 
-			END
-		)
+	SI.shop
 ;
+
+
+出力結果：
++------+---------------+----------------+
+| shop | my_item_count | diferent_count |
++------+---------------+----------------+
+| 仙台 |             3 |              0 |
+| 大阪 |             2 |              1 |
+| 東京 |             3 |              0 |
++------+---------------+----------------+

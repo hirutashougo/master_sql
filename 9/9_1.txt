@@ -7,6 +7,13 @@ SELECT
 					COUNT(*)
 				FROM
 					first_datas
+			) = COUNT(*)
+		AND
+			(
+				SELECT
+					COUNT(*)
+				FROM
+					second_datas
 			) = COUNT(*) THEN '一致'
 		ELSE '不一致'
 	END AS judgement
@@ -49,7 +56,7 @@ second_datas：
 | C      |     5 |     1 |     6 |
 +--------+-------+-------+-------+
 
-二つのテーブルが一致していない場合の出力：
+二つのテーブルが一致していない場合(データが一部違う)の出力：
 +-----------+
 | judgement |
 +-----------+

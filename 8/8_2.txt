@@ -14,9 +14,7 @@ FROM
 LEFT OUTER JOIN
 	children
 ON
-	children.child
-IN
-	(
+	children.child IN(
 		EMP.child_1,
 		EMP.child_2,
 		EMP.child_3
