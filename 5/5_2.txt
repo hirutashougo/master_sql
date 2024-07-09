@@ -1,42 +1,38 @@
-問題
-
-Prpjectsテーブルにて、工程1番まで完了しているプロジェクトを選択
-
-
 回答
-
+/*Prpjectsテーブルにて、工程1番まで完了しているプロジェクトを選択*/
 SELECT
-	project_id
+	project_identification
 FROM
 	projects AS p1
 GROUP BY
-	project_id
+	project_identification
 HAVING
-	'OK' = ALL
-			(
-				SELECT
-					CASE
-					WHEN 
-							step_nbr <= 1
-						AND 
-							status = '完了'
-					THEN 'OK'
-					WHEN
-							step_nbr > 1
-						AND 
-							status = '待機'
-					THEN 'OK'
-					ELSE 'OUT'
-					END AS st
-				FROM
-					projects AS p2
-				WHERE
-					p1.project_id = p2.project_id
+	'OK' =
+	ALL
+	(
+		SELECT
+			CASE
+				WHEN
+					/*工程番号を表す1*/
+					step_number <= 1
+				AND 
+					status = '完了' THEN 'OK'
+				WHEN
+					/*工程番号を表す1*/
+					step_number > 1
+				AND 
+					status = '待機' THEN 'OK'
+				ELSE 'OUT'
+			END AS st
+		FROM
+			projects AS p2
+		WHERE
+			p1.project_identification = p2.project_identification
 			)
 ;
 
-+------------+
-| project_id |
-+------------+
-| CS300      |
-+------------+
++------------------------+
+| project_identification |
++------------------------+
+| CS300                  |
++------------------------+
