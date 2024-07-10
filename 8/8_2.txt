@@ -7,8 +7,7 @@ personnelテーブルから、社員一人当たりの子供の数を取得せ�
 /*社員一人当たりの子供の数を取得する*/
 SELECT
 	EMP.employee,
-	children.child,
-	COUNT(child) OVER (PARTITION BY employee) AS chil_count
+	COUNT(child) AS child_count
 FROM
 	personnel EMP
 LEFT OUTER JOIN
@@ -19,17 +18,18 @@ ON
 		EMP.child_2,
 		EMP.child_3
 	)
+GROUP BY
+	employee
+ORDER BY
+	child_count DESC
 ;
 
 出力結果：
-+----------+-------+------------+
-| employee | child | chil_count |
-+----------+-------+------------+
-| 吉田     | NULL  |          0 |
-| 工藤     | 春子  |          2 |
-| 工藤     | 夏子  |          2 |
-| 赤井     | 二郎  |          3 |
-| 赤井     | 一郎  |          3 |
-| 赤井     | 三郎  |          3 |
-| 鈴木     | 夏子  |          1 |
-+----------+-------+------------+
++----------+-------------+
+| employee | child_count |
++----------+-------------+
+| 赤井     |           3 |
+| 工藤     |           2 |
+| 鈴木     |           1 |
+| 吉田     |           0 |
++----------+-------------+
