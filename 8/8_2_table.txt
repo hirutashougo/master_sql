@@ -1,3 +1,4 @@
+・テーブルの作成
 
 /*personnelテーブルが既にあれば、削除する*/
 DROP TABLE IF EXISTS
@@ -9,9 +10,9 @@ CREATE TABLE
 	personnels
 	(
 		employee CHAR(10) PRIMARY KEY,
-		child_1 CHAR(10),
-		child_2 CHAR(10),
-		child_3 CHAR(10)
+		first_child CHAR(10),
+		second_child CHAR(10),
+		third_child CHAR(10)
 	)
 ;
 
@@ -33,14 +34,17 @@ VALUES
 	)
 ;
 
-+----------+---------+---------+---------+
-| employee | child_1 | child_2 | child_3 |
-+----------+---------+---------+---------+
-| 吉田     | NULL    | NULL    | NULL    |
-| 工藤     | 春子    | 夏子    | NULL    |
-| 赤井     | 一郎    | 二郎    | 三郎    |
-| 鈴木     | 夏子    | NULL    | NULL    |
-+----------+---------+---------+---------+
++----------+-------------+--------------+-------------+
+| employee | first_child | second_child | third_child |
++----------+-------------+--------------+-------------+
+| 吉田     | NULL        | NULL         | NULL        |
+| 工藤     | 春子        | 夏子         | NULL        |
+| 赤井     | 一郎        | 二郎         | 三郎        |
+| 鈴木     | 夏子        | NULL         | NULL        |
++----------+-------------+--------------+-------------+
+
+
+・ビューの作成
 
 /*cildrenビューが既に存在する場合、削除*/
 DROP VIEW IF EXISTS
@@ -56,22 +60,33 @@ CREATE VIEW
 AS
 (
 	SELECT
-		child_1
+		first_child
 	FROM
-		personnel
+		personnels
 )
 UNION
 (
 	SELECT
-		child_2
+		second_child
 	FROM
-		personnel
+		personnels
 )
 UNION
 (
 	SELECT
-		child_3
+		third_child
 	FROM
-		personnel
+		personnels
 )
 ;
+
++-------+
+| child |
++-------+
+| NULL  |
+| 春子  |
+| 一郎  |
+| 夏子  |
+| 二郎  |
+| 三郎  |
++-------+
