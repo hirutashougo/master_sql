@@ -6,17 +6,17 @@ personnelテーブルから、社員一人当たりの子供の数を取得せ�
 回答
 /*社員一人当たりの子供の数を取得する*/
 SELECT
-	EMPLOYEE.employee,
+	workers.employee,
 	COUNT(child) AS child_count
 FROM
-	personnels AS EMPLOYEE
+	personnels AS workers
 LEFT OUTER JOIN
 	children
 ON
 	children.child IN(
-		EMPLOYEE.first_child,
-		EMPLOYEE.second_child,
-		EMPLOYEE.third_child
+		workers.first_child,
+		workers.second_child,
+		workers.third_child
 	)
 GROUP BY
 	employee
