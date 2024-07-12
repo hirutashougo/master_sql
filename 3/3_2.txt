@@ -17,7 +17,7 @@ CREATE TABLE
 		COUNT(name) OVER 
 		(
 			ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
-		) AS id
+		) AS category
 	FROM
 		products
 	)
@@ -30,17 +30,17 @@ CREATE TABLE
 DELETE FROM
 	duplicates_products
 WHERE
-	id <
+	category <
 	(
 		SELECT
-			MAX(P1.id)
+			MAX(P1.category)
 		FROM
 			duplicates_products AS P1,
 			duplicates_products AS P2
 		WHERE
 			P1.name = P2.name
 		AND
-			P1.id > P2.id
+			P1.category <> P2.category
 	)
 ;
 
@@ -53,3 +53,11 @@ ALTER TABLE
 DROP COLUMN
 	category
 ;
+
++--------+-------+
+| name   | price |
++--------+-------+
+| みかん |   100 |
+| りんご |    50 |
+| バナナ |    80 |
++--------+-------+
